@@ -152,7 +152,7 @@
                             See More <i class="fas fa-arrow-right"></i>
                         </button>
                     </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="featured-photos">
                         <!-- Featured photos will be populated by JavaScript -->
                     </div>
                 </div>
@@ -165,7 +165,7 @@
                             See More <i class="fas fa-arrow-right"></i>
                         </button>
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="featured-videos">
                         <!-- Featured videos will be populated by JavaScript -->
                     </div>
                 </div>
@@ -181,7 +181,7 @@
                 </div>
 
                 <div class="testimonial-container overflow-hidden relative">
-                    <div class="testimonial-scroll flex gap-8">
+                    <div class="testimonial-scroll flex gap-8" id="testimonials-scroll">
                         <!-- Testimonials will be duplicated by JavaScript for seamless scrolling -->
                     </div>
                 </div>
@@ -499,7 +499,7 @@
         let currentVideoPage = 0;
         let scrolled = false;
 
-        // Data
+        // Data - FIXED: Corrected duplicate IDs and file extensions
         const youtubeVideos = [
             { id: 'nZ5DNJTSoFs', title: 'Business Tips - Podcast Ep1', category: 'Mwaffs Media - Podcast' },
             { id: '9V1HfbEH1I4', title: 'Business Tips - Podcast Ep2', category: 'Mwaffs Media - Podcast' },
@@ -508,34 +508,33 @@
             { id: '0gKsLzPffYE', title: 'Entrepreneur Stories P1', category: 'Youth Empowerment' },
             { id: 'ckvLlCW_688', title: 'Entrepreneur Stories P2', category: 'Youth Empowerment' },
             { id: 'i3OJ3RkgLZE', title: 'Entrepreneur Stories P3', category: 'Youth Empowerment' },
-            { id: 'oBJB3GHuHaU', title: 'The Journey of LUANAR's most followed comedian ', category: 'entertainment' },
-            { id: 'Kg3zVcGCq8I', title: 'SpecialL Ep with Bunda BSC', category: 'Mwaffs Media - Podcast' },
+            { id: 'oBJB3GHuHaU', title: 'The Journey of LUANAR\'s most followed comedian', category: 'entertainment' },
+            { id: 'Kg3zVcGCq8I', title: 'Special Ep with Bunda BSC', category: 'Mwaffs Media - Podcast' },
         ];
 
-        // Generate photo data
+        // Generate photo data - FIXED: Corrected duplicate IDs and file extensions
         const photos = [
-    { id: 1, url: 'images/d1.jpg', title: 'Day Pictures', category: 'Day Pictures' },
-    { id: 2, url: 'images/d2.jpg', title: 'Day Pictures', category: 'cDay Pictures' },
-    { id: 2, url: 'images/np1.jpg', title: 'Night Pictures', category: 'Night Pictures' },
-    { id: 2, url: 'images/np2.jpg', title: 'Night Pictures', category: 'Night Pictures' },
-    { id: 2, url: 'images/np3.jpg', title: 'Night Pictures', category: 'Night Pictures' },
-    { id: 2, url: 'images/Praise.jpg', title: 'Night Pictures', category: 'Night Pictures' },
-    // Add all your actual photos here...
-];
+            { id: 1, url: 'images/d1.png', title: 'Day Pictures', category: 'Day Pictures' },
+            { id: 2, url: 'images/d2.png', title: 'Day Pictures', category: 'Day Pictures' },
+            { id: 3, url: 'images/np1.png', title: 'Night Pictures', category: 'Night Pictures' },
+            { id: 4, url: 'images/np2.png', title: 'Night Pictures', category: 'Night Pictures' },
+            { id: 5, url: 'images/np3.png', title: 'Night Pictures', category: 'Night Pictures' },
+            { id: 6, url: 'images/Praise.jpg', title: 'Team Member', category: 'Portrait' }
+        ];
 
         const photosPerPage = 12;
         const videosPerPage = 6;
 
         // Team members data
         const teamMembers = [
-    { name: 'Precious Mataka', position: 'CEO', bio: 'Co-Founder leading with creativity, vision, and innovation.', image: 'images/Precious.png' },
-    { name: 'Praise Bwanali', position: 'CEO', bio: 'Creative director with extensive photography experience.', image: 'images/Praise.jpg' },
-    { name: 'Grant Mliule', position: 'Managing Director', bio: 'Strategic leader overseeing operations.', image: 'images/grant.jpg' },
-    { name: 'Fatsani Munkhondya', position: 'Secretary', bio: 'Ensures effective communication and organization.', image: 'images/Fatsani.jpeg' },
-    { name: 'Charles Luwe', position: 'Marketing Director', bio: 'Leads creative marketing strategies.', image: 'images/mwaffs.png' },
-    { name: 'Alexander Makuluni', position: 'Deputy Marketing Director', bio: 'Supports marketing with fresh ideas.', image: 'images/Alexander.jpg' },
-    { name: 'Watson S. Banda', position: 'Chief Whipper', bio: 'Energizes and motivates the team.', image: 'images/Watson.jpg' }
-];
+            { name: 'Precious Mataka', position: 'CEO', bio: 'Co-Founder leading with creativity, vision, and innovation.', image: 'images/Precious.png' },
+            { name: 'Praise Bwanali', position: 'CEO', bio: 'Creative director with extensive photography experience.', image: 'images/Praise.jpg' },
+            { name: 'Grant Mliule', position: 'Managing Director', bio: 'Strategic leader overseeing operations.', image: 'images/grant.jpg' },
+            { name: 'Fatsani Munkhondya', position: 'Secretary', bio: 'Ensures effective communication and organization.', image: 'images/Fatsani.jpeg' },
+            { name: 'Charles Luwe', position: 'Marketing Director', bio: 'Leads creative marketing strategies.', image: 'images/mwaffs.png' },
+            { name: 'Alexander Makuluni', position: 'Deputy Marketing Director', bio: 'Supports marketing with fresh ideas.', image: 'images/Alexander.jpg' },
+            { name: 'Watson S. Banda', position: 'Chief Whipper', bio: 'Energizes and motivates the team.', image: 'images/Watson.jpg' }
+        ];
 
         // Testimonials data
         const testimonials = [
@@ -547,6 +546,14 @@
             { name: 'James Nthala', role: 'Real Estate Developer', text: 'Their architectural photography showcases our properties in the best light possible. Professional and reliable service every time.' }
         ];
 
+        // Featured photos for homepage
+        const featuredPhotos = [
+            { id: 1, url: 'images/d1.png', title: 'A Girl in a Day Light Photo', category: 'Day light Pictures' },
+            { id: 2, url: 'images/d2.png', title: 'A young-man in a Day Light Photo', category: 'Day light Pictures' },
+            { id: 3, url: 'images/np1.png', title: 'A Girl in a Night Photo', category: 'Night Pictures' },
+            { id: 4, url: 'images/np2.png', title: 'A Girl in a Night Photo', category: 'Night Pictures' }
+        ];
+
         // DOM manipulation functions
         function showPage(page) {
             // Hide all sections
@@ -556,8 +563,11 @@
             });
             
             // Show selected section
-            document.getElementById(`${page}-section`).classList.remove('section-hidden');
-            document.getElementById(`${page}-section`).classList.add('section-visible');
+            const targetSection = document.getElementById(`${page}-section`);
+            if (targetSection) {
+                targetSection.classList.remove('section-hidden');
+                targetSection.classList.add('section-visible');
+            }
             
             // Update current page
             currentPage = page;
@@ -566,7 +576,11 @@
             document.querySelectorAll('nav button').forEach(btn => {
                 btn.classList.remove('text-red-500', 'font-bold');
             });
-            document.querySelector(`.nav-${page}`).classList.add('text-red-500', 'font-bold');
+            
+            const activeNav = document.querySelector(`.nav-${page}`);
+            if (activeNav) {
+                activeNav.classList.add('text-red-500', 'font-bold');
+            }
             
             // Scroll to top
             window.scrollTo(0, 0);
@@ -585,77 +599,76 @@
 
         function initHomePage() {
             // Render featured photos
-            const featuredPhotosContainer = document.querySelector('#home-section .grid-cols-4');
-           const featuredPhotos = [
-    { id: 1, url: 'images/d1.png', title: 'A Girl in a Day Light Photo', category: 'Day light Pictures' },
-    { id: 2, url: 'images/d2.png', title: 'A young-man in a Day Light Photo', category: 'Day light Pictures' },
-    { id: 3, url: 'images/np1.png', title: 'A Girl in a Night Photo', category: 'Night Pictures' },
-    { id: 4, url: 'images/np2.png', title: 'A Girl in a Night Photo', category: 'Night Pictures' }
-];
-            
-            featuredPhotosContainer.innerHTML = featuredPhotos.map(photo => `
-                <div
-                    onclick="openModal(${JSON.stringify(photo).replace(/"/g, '&quot;')}, 'image')"
-                    class="relative group cursor-pointer overflow-hidden rounded-lg shadow-lg transform hover:scale-105 transition-all duration-300"
-                >
-                    <img src="${photo.url}" alt="${photo.title}" class="w-full h-64 object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
-                        <div class="text-white">
-                            <h3 class="font-bold">${photo.title}</h3>
-                            <p class="text-sm capitalize">${photo.category}</p>
+            const featuredPhotosContainer = document.getElementById('featured-photos');
+            if (featuredPhotosContainer) {
+                featuredPhotosContainer.innerHTML = featuredPhotos.map(photo => `
+                    <div
+                        onclick="openModal(${JSON.stringify(photo).replace(/"/g, '&quot;')}, 'image')"
+                        class="relative group cursor-pointer overflow-hidden rounded-lg shadow-lg transform hover:scale-105 transition-all duration-300"
+                    >
+                        <img src="${photo.url}" alt="${photo.title}" class="w-full h-64 object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                            <div class="text-white">
+                                <h3 class="font-bold">${photo.title}</h3>
+                                <p class="text-sm capitalize">${photo.category}</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-            `).join('');
+                `).join('');
+            }
             
             // Render featured videos
-            const featuredVideosContainer = document.querySelector('#home-section .grid-cols-3');
-            const featuredVideos = youtubeVideos.slice(0, 3); // Get first 3 videos
-            
-            featuredVideosContainer.innerHTML = featuredVideos.map(video => `
-                <div class="bg-gray-800 rounded-lg overflow-hidden shadow-xl transform hover:scale-105 transition-all">
-                    <div class="aspect-video">
-                        <iframe
-                            src="https://www.youtube.com/embed/${video.id}"
-                            title="${video.title}"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen
-                            class="w-full h-full"
-                        ></iframe>
+            const featuredVideosContainer = document.getElementById('featured-videos');
+            if (featuredVideosContainer) {
+                const featuredVideos = youtubeVideos.slice(0, 3); // Get first 3 videos
+                
+                featuredVideosContainer.innerHTML = featuredVideos.map(video => `
+                    <div class="bg-gray-800 rounded-lg overflow-hidden shadow-xl transform hover:scale-105 transition-all">
+                        <div class="aspect-video">
+                            <iframe
+                                src="https://www.youtube.com/embed/${video.id}"
+                                title="${video.title}"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen
+                                class="w-full h-full"
+                            ></iframe>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-bold text-lg mb-2">${video.title}</h3>
+                            <span class="text-sm text-red-400 capitalize">${video.category}</span>
+                        </div>
                     </div>
-                    <div class="p-4">
-                        <h3 class="font-bold text-lg mb-2">${video.title}</h3>
-                        <span class="text-sm text-red-400 capitalize">${video.category}</span>
-                    </div>
-                </div>
-            `).join('');
+                `).join('');
+            }
             
             // Render testimonials
-            const testimonialsContainer = document.querySelector('.testimonial-scroll');
-            // Duplicate testimonials for seamless scrolling
-            const duplicatedTestimonials = [...testimonials, ...testimonials];
-            
-            testimonialsContainer.innerHTML = duplicatedTestimonials.map(testimonial => `
-                <div class="min-w-[350px] bg-white p-6 rounded-lg shadow-lg">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 rounded-full bg-red-500 flex items-center justify-center text-white font-bold">
-                            ${testimonial.name.charAt(0)}
+            const testimonialsContainer = document.getElementById('testimonials-scroll');
+            if (testimonialsContainer) {
+                // Duplicate testimonials for seamless scrolling
+                const duplicatedTestimonials = [...testimonials, ...testimonials];
+                
+                testimonialsContainer.innerHTML = duplicatedTestimonials.map(testimonial => `
+                    <div class="min-w-[350px] bg-white p-6 rounded-lg shadow-lg">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 rounded-full bg-red-500 flex items-center justify-center text-white font-bold">
+                                ${testimonial.name.charAt(0)}
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="font-bold text-gray-800">${testimonial.name}</h4>
+                                <p class="text-sm text-gray-600">${testimonial.role}</p>
+                            </div>
                         </div>
-                        <div class="ml-4">
-                            <h4 class="font-bold text-gray-800">${testimonial.name}</h4>
-                            <p class="text-sm text-gray-600">${testimonial.role}</p>
+                        <p class="text-gray-700 italic">"${testimonial.text}"</p>
+                        <div class="flex text-yellow-400 mt-4">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
                         </div>
                     </div>
-                    <p class="text-gray-700 italic">"${testimonial.text}"</p>
-                    <div class="flex text-yellow-400 mt-4">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                </div>
-            `).join('');
+                `).join('');
+            }
         }
 
         function toggleMobileMenu() {
@@ -673,16 +686,18 @@
         function initPhotographyPage() {
             // Populate categories
             const categoriesContainer = document.getElementById('photo-categories');
-            const categories = ['all', 'wedding', 'portrait', 'landscape', 'corporate', 'event'];
+            const categories = ['all', 'Day Pictures', 'Night Pictures', 'Portrait'];
             
-            categoriesContainer.innerHTML = categories.map(cat => `
-                <button 
-                    onclick="setPhotoCategory('${cat}')" 
-                    class="px-6 py-2 rounded-full capitalize transition-all ${currentCategory === cat ? 'bg-red-500 text-white' : 'bg-white text-gray-700 hover:bg-red-100'}"
-                >
-                    ${cat}
-                </button>
-            `).join('');
+            if (categoriesContainer) {
+                categoriesContainer.innerHTML = categories.map(cat => `
+                    <button 
+                        onclick="setPhotoCategory('${cat}')" 
+                        class="px-6 py-2 rounded-full capitalize transition-all ${currentCategory === cat ? 'bg-red-500 text-white' : 'bg-white text-gray-700 hover:bg-red-100'}"
+                    >
+                        ${cat}
+                    </button>
+                `).join('');
+            }
             
             // Render photos
             renderPhotos();
@@ -696,7 +711,7 @@
         }
 
         function updatePhotoCategories() {
-            const categories = ['all', 'wedding', 'portrait', 'landscape', 'corporate', 'event'];
+            const categories = ['all', 'Day Pictures', 'Night Pictures', 'Portrait'];
             const buttons = document.querySelectorAll('#photo-categories button');
             
             buttons.forEach((btn, index) => {
@@ -721,45 +736,49 @@
             
             // Render photo gallery
             const galleryContainer = document.getElementById('photo-gallery');
-            galleryContainer.innerHTML = displayPhotos.map(photo => `
-                <div
-                    onclick="openModal(${JSON.stringify(photo).replace(/"/g, '&quot;')}, 'image')"
-                    class="relative group cursor-pointer overflow-hidden rounded-lg shadow-lg transform hover:scale-105 transition-all duration-300"
-                >
-                    <img src="${photo.url}" alt="${photo.title}" class="w-full h-64 object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
-                        <div class="text-white">
-                            <h3 class="font-bold">${photo.title}</h3>
-                            <p class="text-sm capitalize">${photo.category}</p>
+            if (galleryContainer) {
+                galleryContainer.innerHTML = displayPhotos.map(photo => `
+                    <div
+                        onclick="openModal(${JSON.stringify(photo).replace(/"/g, '&quot;')}, 'image')"
+                        class="relative group cursor-pointer overflow-hidden rounded-lg shadow-lg transform hover:scale-105 transition-all duration-300"
+                    >
+                        <img src="${photo.url}" alt="${photo.title}" class="w-full h-64 object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                            <div class="text-white">
+                                <h3 class="font-bold">${photo.title}</h3>
+                                <p class="text-sm capitalize">${photo.category}</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-            `).join('');
+                `).join('');
+            }
             
             // Render pagination
             const paginationContainer = document.getElementById('photo-pagination');
-            if (totalPages > 1) {
-                paginationContainer.innerHTML = `
-                    <button
-                        onclick="changePhotoPage(${currentPhotoPage - 1})"
-                        ${currentPhotoPage === 0 ? 'disabled' : ''}
-                        class="p-2 rounded-full bg-red-500 text-white ${currentPhotoPage === 0 ? 'bg-gray-300 cursor-not-allowed' : 'hover:bg-red-600'} transition-colors"
-                    >
-                        <i class="fas fa-chevron-left"></i>
-                    </button>
-                    <span class="text-lg font-semibold">
-                        Page ${currentPhotoPage + 1} of ${totalPages}
-                    </span>
-                    <button
-                        onclick="changePhotoPage(${currentPhotoPage + 1})"
-                        ${currentPhotoPage === totalPages - 1 ? 'disabled' : ''}
-                        class="p-2 rounded-full bg-red-500 text-white ${currentPhotoPage === totalPages - 1 ? 'bg-gray-300 cursor-not-allowed' : 'hover:bg-red-600'} transition-colors"
-                    >
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
-                `;
-            } else {
-                paginationContainer.innerHTML = '';
+            if (paginationContainer) {
+                if (totalPages > 1) {
+                    paginationContainer.innerHTML = `
+                        <button
+                            onclick="changePhotoPage(${currentPhotoPage - 1})"
+                            ${currentPhotoPage === 0 ? 'disabled' : ''}
+                            class="p-2 rounded-full bg-red-500 text-white ${currentPhotoPage === 0 ? 'bg-gray-300 cursor-not-allowed' : 'hover:bg-red-600'} transition-colors"
+                        >
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <span class="text-lg font-semibold">
+                            Page ${currentPhotoPage + 1} of ${totalPages}
+                        </span>
+                        <button
+                            onclick="changePhotoPage(${currentPhotoPage + 1})"
+                            ${currentPhotoPage === totalPages - 1 ? 'disabled' : ''}
+                            class="p-2 rounded-full bg-red-500 text-white ${currentPhotoPage === totalPages - 1 ? 'bg-gray-300 cursor-not-allowed' : 'hover:bg-red-600'} transition-colors"
+                        >
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    `;
+                } else {
+                    paginationContainer.innerHTML = '';
+                }
             }
         }
 
@@ -786,48 +805,52 @@
             
             // Render video gallery
             const galleryContainer = document.getElementById('video-gallery');
-            galleryContainer.innerHTML = displayVideos.map(video => `
-                <div class="bg-gray-800 rounded-lg overflow-hidden shadow-xl transform hover:scale-105 transition-all">
-                    <div class="aspect-video">
-                        <iframe
-                            src="https://www.youtube.com/embed/${video.id}"
-                            title="${video.title}"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen
-                            class="w-full h-full"
-                        ></iframe>
+            if (galleryContainer) {
+                galleryContainer.innerHTML = displayVideos.map(video => `
+                    <div class="bg-gray-800 rounded-lg overflow-hidden shadow-xl transform hover:scale-105 transition-all">
+                        <div class="aspect-video">
+                            <iframe
+                                src="https://www.youtube.com/embed/${video.id}"
+                                title="${video.title}"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen
+                                class="w-full h-full"
+                            ></iframe>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-bold text-lg mb-2">${video.title}</h3>
+                            <span class="text-sm text-red-400 capitalize">${video.category}</span>
+                        </div>
                     </div>
-                    <div class="p-4">
-                        <h3 class="font-bold text-lg mb-2">${video.title}</h3>
-                        <span class="text-sm text-red-400 capitalize">${video.category}</span>
-                    </div>
-                </div>
-            `).join('');
+                `).join('');
+            }
             
             // Render pagination
             const paginationContainer = document.getElementById('video-pagination');
-            if (totalPages > 1) {
-                paginationContainer.innerHTML = `
-                    <button
-                        onclick="changeVideoPage(${currentVideoPage - 1})"
-                        ${currentVideoPage === 0 ? 'disabled' : ''}
-                        class="p-2 rounded-full bg-red-500 text-white ${currentVideoPage === 0 ? 'bg-gray-600 cursor-not-allowed' : 'hover:bg-red-600'}"
-                    >
-                        <i class="fas fa-chevron-left"></i>
-                    </button>
-                    <span class="text-lg font-semibold">
-                        Page ${currentVideoPage + 1} of ${totalPages}
-                    </span>
-                    <button
-                        onclick="changeVideoPage(${currentVideoPage + 1})"
-                        ${currentVideoPage === totalPages - 1 ? 'disabled' : ''}
-                        class="p-2 rounded-full bg-red-500 text-white ${currentVideoPage === totalPages - 1 ? 'bg-gray-600 cursor-not-allowed' : 'hover:bg-red-600'}"
-                    >
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
-                `;
-            } else {
-                paginationContainer.innerHTML = '';
+            if (paginationContainer) {
+                if (totalPages > 1) {
+                    paginationContainer.innerHTML = `
+                        <button
+                            onclick="changeVideoPage(${currentVideoPage - 1})"
+                            ${currentVideoPage === 0 ? 'disabled' : ''}
+                            class="p-2 rounded-full bg-red-500 text-white ${currentVideoPage === 0 ? 'bg-gray-600 cursor-not-allowed' : 'hover:bg-red-600'}"
+                        >
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <span class="text-lg font-semibold">
+                            Page ${currentVideoPage + 1} of ${totalPages}
+                        </span>
+                        <button
+                            onclick="changeVideoPage(${currentVideoPage + 1})"
+                            ${currentVideoPage === totalPages - 1 ? 'disabled' : ''}
+                            class="p-2 rounded-full bg-red-500 text-white ${currentVideoPage === totalPages - 1 ? 'bg-gray-600 cursor-not-allowed' : 'hover:bg-red-600'}"
+                        >
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    `;
+                } else {
+                    paginationContainer.innerHTML = '';
+                }
             }
         }
 
@@ -842,16 +865,18 @@
 
         function initTeamPage() {
             const teamContainer = document.getElementById('team-members');
-            teamContainer.innerHTML = teamMembers.map(member => `
-    <div class="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow">
-        <div class="h-64 bg-cover bg-center" style="background-image: url('${member.image}')"></div>
-        <div class="p-6">
-            <h3 class="text-xl font-bold mb-2">${member.name}</h3>
-            <p class="text-red-500 font-semibold mb-3">${member.position}</p>
-            <p class="text-gray-600 text-sm">${member.bio}</p>
-        </div>
-    </div>
-`).join('');
+            if (teamContainer) {
+                teamContainer.innerHTML = teamMembers.map(member => `
+                    <div class="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow">
+                        <div class="h-64 bg-cover bg-center" style="background-image: url('${member.image}')"></div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">${member.name}</h3>
+                            <p class="text-red-500 font-semibold mb-3">${member.position}</p>
+                            <p class="text-gray-600 text-sm">${member.bio}</p>
+                        </div>
+                    </div>
+                `).join('');
+            }
         }
 
         function openModal(media, type) {
@@ -894,7 +919,10 @@
         // Initialize the page
         document.addEventListener('DOMContentLoaded', function() {
             // Set active navigation item
-            document.querySelector('.nav-home').classList.add('text-red-500', 'font-bold');
+            const homeNav = document.querySelector('.nav-home');
+            if (homeNav) {
+                homeNav.classList.add('text-red-500', 'font-bold');
+            }
             
             // Initialize homepage content
             initHomePage();
