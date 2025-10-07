@@ -7,7 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Custom styles */
+        /* Previous custom styles remain the same */
         .section-hidden {
             display: none;
         }
@@ -114,6 +114,118 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
+        
+        /* NEW STYLES FOR IMPROVEMENTS */
+        
+        /* Advanced animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        /* Improved modal with navigation */
+        .modal-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.5);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: background 0.3s;
+        }
+        
+        .modal-nav-btn:hover {
+            background: rgba(0,0,0,0.8);
+        }
+        
+        .modal-prev {
+            left: 20px;
+        }
+        
+        .modal-next {
+            right: 20px;
+        }
+        
+        /* Blog card styles */
+        .blog-card {
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        /* Service card styles */
+        .service-card {
+            transition: all 0.3s ease;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        /* Newsletter form */
+        .newsletter-form {
+            position: relative;
+        }
+        
+        .newsletter-form input {
+            padding-right: 130px;
+        }
+        
+        /* Testimonial slider */
+        .testimonial-slider {
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .testimonial-track {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        
+        .testimonial-slide {
+            min-width: 100%;
+            box-sizing: border-box;
+        }
+        
+        /* Booking form styles */
+        .booking-form input,
+        .booking-form textarea,
+        .booking-form select {
+            border: 1px solid #e5e7eb;
+            transition: border-color 0.3s;
+        }
+        
+        .booking-form input:focus,
+        .booking-form textarea:focus,
+        .booking-form select:focus {
+            border-color: #ef4444;
+            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+        }
     </style>
 </head>
 <body class="bg-white min-h-screen">
@@ -129,8 +241,10 @@
                 <div class="hidden md:flex items-center gap-8">
                     <button onclick="showPage('home')" class="text-white capitalize hover:text-red-500 transition-colors nav-home">Home</button>
                     <button onclick="showPage('about')" class="text-white capitalize hover:text-red-500 transition-colors nav-about">About</button>
+                    <button onclick="showPage('services')" class="text-white capitalize hover:text-red-500 transition-colors nav-services">Services</button>
                     <button onclick="showPage('photography')" class="text-white capitalize hover:text-red-500 transition-colors nav-photography">Photography</button>
                     <button onclick="showPage('videography')" class="text-white capitalize hover:text-red-500 transition-colors nav-videography">Videography</button>
+                    <button onclick="showPage('blog')" class="text-white capitalize hover:text-red-500 transition-colors nav-blog">Blog</button>
                     <button onclick="showPage('team')" class="text-white capitalize hover:text-red-500 transition-colors nav-team">Team</button>
                     <button onclick="showPage('contact')" class="text-white capitalize hover:text-red-500 transition-colors nav-contact">Contact</button>
                 </div>
@@ -144,8 +258,10 @@
         <div id="mobile-menu" class="md:hidden bg-gray-800 border-t border-gray-700 mobile-menu-hidden">
             <button onclick="showPage('home'); toggleMobileMenu();" class="block w-full text-left px-6 py-3 text-white capitalize hover:bg-gray-700">Home</button>
             <button onclick="showPage('about'); toggleMobileMenu();" class="block w-full text-left px-6 py-3 text-white capitalize hover:bg-gray-700">About</button>
+            <button onclick="showPage('services'); toggleMobileMenu();" class="block w-full text-left px-6 py-3 text-white capitalize hover:bg-gray-700">Services</button>
             <button onclick="showPage('photography'); toggleMobileMenu();" class="block w-full text-left px-6 py-3 text-white capitalize hover:bg-gray-700">Photography</button>
             <button onclick="showPage('videography'); toggleMobileMenu();" class="block w-full text-left px-6 py-3 text-white capitalize hover:bg-gray-700">Videography</button>
+            <button onclick="showPage('blog'); toggleMobileMenu();" class="block w-full text-left px-6 py-3 text-white capitalize hover:bg-gray-700">Blog</button>
             <button onclick="showPage('team'); toggleMobileMenu();" class="block w-full text-left px-6 py-3 text-white capitalize hover:bg-gray-700">Team</button>
             <button onclick="showPage('contact'); toggleMobileMenu();" class="block w-full text-left px-6 py-3 text-white capitalize hover:bg-gray-700">Contact</button>
         </div>
@@ -168,7 +284,7 @@
     <!-- Hero Section -->
     <section id="home-section" class="section-visible">
         <div class="relative h-screen flex items-center justify-center text-white text-center px-4 parallax" style="background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('images/hero-bg.jpg');">
-            <div class="relative z-10 max-w-4xl mx-auto">
+            <div class="relative z-10 max-w-4xl mx-auto fade-in-up">
                 <h1 class="text-5xl md:text-7xl font-bold mb-6 text-balance">MWAFFS MEDIA</h1>
                 <p class="text-2xl md:text-3xl mb-4 text-red-400 text-balance">Capturing Malawi's Stories Through Creative Excellence</p>
                 <p class="text-xl md:text-2xl mb-8 text-balance">Professional Photography • Videography • Graphic Design</p>
@@ -176,8 +292,8 @@
                     <button onclick="showPage('photography')" class="bg-red-500 hover:bg-red-600 text-white px-8 py-3 rounded-full flex items-center gap-2 transition-all transform hover:scale-105 hover-lift">
                         <i class="fas fa-camera"></i> View Photography
                     </button>
-                    <button onclick="showPage('videography')" class="bg-transparent border-2 border-white hover:bg-white hover:text-gray-900 text-white px-8 py-3 rounded-full flex items-center gap-2 transition-all transform hover:scale-105 hover-lift">
-                        <i class="fas fa-video"></i> View Videography
+                    <button onclick="showPage('services')" class="bg-transparent border-2 border-white hover:bg-white hover:text-gray-900 text-white px-8 py-3 rounded-full flex items-center gap-2 transition-all transform hover:scale-105 hover-lift">
+                        <i class="fas fa-concierge-bell"></i> Our Services
                     </button>
                 </div>
             </div>
@@ -191,13 +307,13 @@
         <!-- About Section (Part of Home) -->
         <div class="py-20 bg-gray-50">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-16">
+                <div class="text-center mb-16 fade-in-up">
                     <h2 class="text-4xl md:text-5xl font-bold mb-4 text-balance">About MWAFFS MEDIA</h2>
                     <p class="text-xl text-gray-600 text-balance">Pioneering creative excellence in Malawi's media landscape</p>
                 </div>
 
                 <div class="grid md:grid-cols-2 gap-12 items-center mb-16">
-                    <div>
+                    <div class="fade-in-up">
                         <h3 class="text-3xl font-bold mb-4 gradient-text">Our Story</h3>
                         <p class="text-lg text-gray-700 mb-4 text-justify">
                             MWAFFS MEDIA stands at the forefront of Malawi's creative industry, delivering exceptional photography, videography, and graphic design services. Founded with a vision to tell Malawi's stories through powerful visual narratives.
@@ -205,9 +321,14 @@
                         <p class="text-lg text-gray-700 text-justify">
                             Our team combines technical expertise with artistic creativity, capturing moments that matter with professional precision and cultural sensitivity.
                         </p>
+                        <div class="mt-6">
+                            <button onclick="showPage('about')" class="bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-full transition-all transform hover:scale-105 hover-lift">
+                                Read More About Us
+                            </button>
+                        </div>
                     </div>
 
-                    <div class="grid grid-cols-2 gap-6">
+                    <div class="grid grid-cols-2 gap-6 fade-in-up">
                         <div class="bg-white p-6 rounded-lg shadow-lg text-center transform hover:scale-105 transition-all hover-lift">
                             <div id="stat-projects" class="text-4xl font-bold text-red-500 mb-2 count-animate" data-count="500">0</div>
                             <div class="text-gray-600">Projects</div>
@@ -229,16 +350,67 @@
             </div>
         </div>
 
-        <!-- Featured Work Section -->
+        <!-- Services Preview Section -->
         <div class="py-20 bg-white">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-16">
+                <div class="text-center mb-16 fade-in-up">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-4 text-balance">Our Services</h2>
+                    <p class="text-xl text-gray-600 text-balance">Comprehensive media solutions for all your needs</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="service-card bg-gray-50 p-8 rounded-xl text-center fade-in-up">
+                        <div class="w-20 h-20 bg-red-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-camera text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">Photography</h3>
+                        <p class="text-gray-600 mb-6 text-justify">
+                            Professional photography services for events, portraits, products, and commercial needs. We capture moments that tell your story.
+                        </p>
+                        <button onclick="showPage('photography')" class="text-red-500 font-semibold hover:text-red-600 transition-colors">
+                            View Portfolio <i class="fas fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+
+                    <div class="service-card bg-gray-50 p-8 rounded-xl text-center fade-in-up">
+                        <div class="w-20 h-20 bg-red-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-video text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">Videography</h3>
+                        <p class="text-gray-600 mb-6 text-justify">
+                            High-quality video production for events, documentaries, commercials, and corporate videos. We bring stories to life.
+                        </p>
+                        <button onclick="showPage('videography')" class="text-red-500 font-semibold hover:text-red-600 transition-colors">
+                            View Portfolio <i class="fas fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+
+                    <div class="service-card bg-gray-50 p-8 rounded-xl text-center fade-in-up">
+                        <div class="w-20 h-20 bg-red-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-paint-brush text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">Graphic Design</h3>
+                        <p class="text-gray-600 mb-6 text-justify">
+                            Creative design solutions for branding, marketing materials, social media content, and custom graphics.
+                        </p>
+                        <button onclick="showPage('services')" class="text-red-500 font-semibold hover:text-red-600 transition-colors">
+                            Learn More <i class="fas fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Featured Work Section -->
+        <div class="py-20 bg-gray-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16 fade-in-up">
                     <h2 class="text-4xl md:text-5xl font-bold mb-4 text-balance">Our Featured Work</h2>
                     <p class="text-xl text-gray-600 text-balance">A glimpse of our creative portfolio</p>
                 </div>
 
                 <!-- Featured Photography -->
-                <div class="mb-20">
+                <div class="mb-20 fade-in-up">
                     <div class="flex justify-between items-center mb-8">
                         <h3 class="text-3xl font-bold text-gray-800">Photography</h3>
                         <button onclick="showPage('photography')" class="text-red-500 hover:text-red-600 font-semibold flex items-center gap-2 hover-lift">
@@ -251,7 +423,7 @@
                 </div>
 
                 <!-- Featured Videography -->
-                <div>
+                <div class="fade-in-up">
                     <div class="flex justify-between items-center mb-8">
                         <h3 class="text-3xl font-bold text-gray-800">Videography</h3>
                         <button onclick="showPage('videography')" class="text-red-500 hover:text-red-600 font-semibold flex items-center gap-2 hover-lift">
@@ -265,110 +437,81 @@
             </div>
         </div>
 
-        <!-- Customer Feedback Section -->
-        <div class="py-20 bg-gray-100">
+        <!-- Testimonials Section -->
+        <div class="py-20 bg-white">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-16">
+                <div class="text-center mb-16 fade-in-up">
                     <h2 class="text-4xl md:text-5xl font-bold mb-4 text-balance">What Our Clients Say</h2>
                     <p class="text-xl text-gray-600 text-balance">Hear from our satisfied customers</p>
                 </div>
 
-                <div class="testimonial-container overflow-hidden relative">
-                    <div class="testimonial-scroll flex gap-8" id="testimonials-scroll">
-                        <!-- Testimonials will be duplicated by JavaScript for seamless scrolling -->
+                <div class="testimonial-slider relative" id="testimonial-slider">
+                    <div class="testimonial-track flex" id="testimonial-track">
+                        <!-- Testimonials will be populated by JavaScript -->
+                    </div>
+                    <button class="modal-nav-btn modal-prev" onclick="prevTestimonial()">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="modal-nav-btn modal-next" onclick="nextTestimonial()">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <div class="flex justify-center mt-8" id="testimonial-dots">
+                        <!-- Dots will be populated by JavaScript -->
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Get In Touch Section (Simplified) -->
-        <div class="py-20 bg-gray-900 text-white">
+        <!-- Blog Preview Section -->
+        <div class="py-20 bg-gray-100">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-16">
-                    <h2 class="text-4xl md:text-5xl font-bold mb-4 text-balance">Get In Touch</h2>
-                    <p class="text-xl text-gray-400 text-balance">Ready to bring your vision to life? Contact us today!</p>
+                <div class="text-center mb-16 fade-in-up">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-4 text-balance">Latest From Our Blog</h2>
+                    <p class="text-xl text-gray-600 text-balance">Insights, tips, and stories from the creative world</p>
                 </div>
 
-                <div class="grid md:grid-cols-2 gap-12">
-                    <div class="space-y-8">
-                        <h3 class="text-2xl font-bold mb-6">Contact Information</h3>
-                        
-                        <div class="flex items-start gap-4">
-                            <i class="fas fa-map-marker-alt text-red-500 text-xl mt-1"></i>
-                            <div>
-                                <h4 class="font-bold mb-1">Office Address</h4>
-                                <p class="text-gray-400 text-justify">Blantyre, Southern Region<br>Malawi</p>
-                            </div>
-                        </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="blog-preview">
+                    <!-- Blog posts will be populated by JavaScript -->
+                </div>
 
-                        <div class="flex items-start gap-4">
-                            <i class="fas fa-phone text-red-500 text-xl mt-1"></i>
-                            <div>
-                                <h4 class="font-bold mb-1">Phone</h4>
-                                <p class="text-gray-400">+265 888 251 157</p>
-                            </div>
-                        </div>
+                <div class="text-center mt-12 fade-in-up">
+                    <button onclick="showPage('blog')" class="bg-red-500 hover:bg-red-600 text-white px-8 py-3 rounded-full font-bold transition-colors hover-lift">
+                        View All Blog Posts
+                    </button>
+                </div>
+            </div>
+        </div>
 
-                        <div class="flex items-start gap-4">
-                            <i class="fas fa-envelope text-red-500 text-xl mt-1"></i>
-                            <div>
-                                <h4 class="font-bold mb-1">Email</h4>
-                                <p class="text-gray-400">mwaffsmedia@gmail.com</p>
-                            </div>
-                        </div>
+        <!-- Newsletter Section -->
+        <div class="py-20 bg-gray-900 text-white">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center fade-in-up">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-balance">Stay Updated</h2>
+                <p class="text-xl text-gray-400 mb-8 text-balance">Subscribe to our newsletter for the latest updates, tips, and exclusive offers</p>
+                
+                <div class="max-w-md mx-auto newsletter-form">
+                    <input type="email" placeholder="Enter your email" class="w-full px-6 py-4 rounded-full text-gray-900 focus:outline-none focus:ring-2 focus:ring-red-500">
+                    <button class="absolute right-2 top-2 bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-full transition-colors">
+                        Subscribe
+                    </button>
+                </div>
+            </div>
+        </div>
 
-                        <div>
-                            <h4 class="font-bold mb-4">Follow Us</h4>
-                            <div class="flex gap-4">
-                                <a href="#" class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors transform hover:scale-110 hover-lift" title="Facebook">
-                                    <i class="fab fa-facebook-f"></i>
-                                </a>
-                                <a href="#" class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors transform hover:scale-110 hover-lift" title="YouTube">
-                                    <i class="fab fa-youtube"></i>
-                                </a>
-                                <a href="#" class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors transform hover:scale-110 hover-lift" title="Instagram">
-                                    <i class="fab fa-instagram"></i>
-                                </a>
-                                <a href="#" class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors transform hover:scale-110 hover-lift" title="Twitter">
-                                    <i class="fab fa-twitter"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+        <!-- Get In Touch Section (Simplified) -->
+        <div class="py-20 bg-red-600 text-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16 fade-in-up">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-4 text-balance">Ready to Work With Us?</h2>
+                    <p class="text-xl text-red-100 text-balance">Let's bring your vision to life. Contact us today for a free consultation!</p>
+                </div>
 
-                    <div class="bg-gray-800 p-8 rounded-lg hover-lift">
-                        <h3 class="text-2xl font-bold mb-6">Send us a Message</h3>
-                        <div class="space-y-4">
-                            <div>
-                                <label class="block mb-2 font-semibold">Full Name</label>
-                                <input type="text" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 focus:border-red-500 focus:outline-none text-white" placeholder="John Doe">
-                            </div>
-
-                            <div>
-                                <label class="block mb-2 font-semibold">Email</label>
-                                <input type="email" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 focus:border-red-500 focus:outline-none text-white" placeholder="john@example.com">
-                            </div>
-
-                            <div>
-                                <label class="block mb-2 font-semibold">Service Needed</label>
-                                <select class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 focus:border-red-500 focus:outline-none text-white">
-                                    <option>Photography</option>
-                                    <option>Videography</option>
-                                    <option>Graphic Design</option>
-                                    <option>Other</option>
-                                </select>
-                            </div>
-
-                            <div>
-                                <label class="block mb-2 font-semibold">Message</label>
-                                <textarea rows="4" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 focus:border-red-500 focus:outline-none text-white" placeholder="Tell us about your project..."></textarea>
-                            </div>
-
-                            <button class="w-full bg-red-500 hover:bg-red-600 text-white px-8 py-3 rounded-full font-bold transition-colors hover-lift">
-                                Send Message
-                            </button>
-                        </div>
-                    </div>
+                <div class="flex justify-center gap-4 flex-wrap fade-in-up">
+                    <button onclick="showPage('contact')" class="bg-white text-red-600 hover:bg-gray-100 px-8 py-3 rounded-full font-bold transition-all transform hover:scale-105 hover-lift">
+                        Get In Touch
+                    </button>
+                    <button onclick="showPage('services')" class="bg-transparent border-2 border-white hover:bg-white hover:text-red-600 text-white px-8 py-3 rounded-full font-bold transition-all transform hover:scale-105 hover-lift">
+                        View Our Services
+                    </button>
                 </div>
             </div>
         </div>
@@ -388,8 +531,11 @@
                     <p class="text-lg text-gray-700 mb-4 text-justify">
                         MWAFFS MEDIA stands at the forefront of Malawi's creative industry, delivering exceptional photography, videography, and graphic design services. Founded with a vision to tell Malawi's stories through powerful visual narratives.
                     </p>
+                    <p class="text-lg text-gray-700 mb-4 text-justify">
+                        Our team combines technical expertise with artistic creativity, capturing moments that matter with professional precision and cultural sensitivity. We believe in the power of visual storytelling to connect, inspire, and transform.
+                    </p>
                     <p class="text-lg text-gray-700 text-justify">
-                        Our team combines technical expertise with artistic creativity, capturing moments that matter with professional precision and cultural sensitivity.
+                        Over the years, we've had the privilege of working with diverse clients across various industries, helping them tell their unique stories through our creative lens.
                     </p>
                 </div>
 
@@ -411,6 +557,191 @@
                         <div class="text-gray-600">Awards</div>
                     </div>
                 </div>
+            </div>
+
+            <div class="bg-white rounded-xl p-8 shadow-lg mb-16">
+                <h3 class="text-3xl font-bold mb-6 text-center gradient-text">Our Mission & Vision</h3>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-red-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-bullseye text-white text-2xl"></i>
+                        </div>
+                        <h4 class="text-xl font-bold mb-4">Our Mission</h4>
+                        <p class="text-gray-700 text-justify">
+                            To capture and create compelling visual stories that resonate with audiences, using cutting-edge technology and creative expertise to deliver exceptional media solutions that exceed client expectations.
+                        </p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-red-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-eye text-white text-2xl"></i>
+                        </div>
+                        <h4 class="text-xl font-bold mb-4">Our Vision</h4>
+                        <p class="text-gray-700 text-justify">
+                            To be Malawi's leading creative media company, recognized for innovation, quality, and the ability to transform ideas into powerful visual narratives that inspire and connect people.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <h3 class="text-3xl font-bold mb-8 gradient-text">Why Choose Us</h3>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-white p-6 rounded-lg shadow-lg hover-lift">
+                        <div class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-award text-white"></i>
+                        </div>
+                        <h4 class="text-xl font-bold mb-2">Quality Assurance</h4>
+                        <p class="text-gray-700 text-justify">We maintain the highest standards in all our projects, ensuring exceptional quality in every deliverable.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-lg hover-lift">
+                        <div class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-lightbulb text-white"></i>
+                        </div>
+                        <h4 class="text-xl font-bold mb-2">Creative Innovation</h4>
+                        <p class="text-gray-700 text-justify">We blend creativity with technology to deliver innovative solutions that stand out from the crowd.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-lg hover-lift">
+                        <div class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-users text-white"></i>
+                        </div>
+                        <h4 class="text-xl font-bold mb-2">Client-Centric Approach</h4>
+                        <p class="text-gray-700 text-justify">Your vision is our priority. We work closely with you to ensure your ideas are brought to life exactly as imagined.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services-section" class="section-hidden py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 text-balance">Our Services</h2>
+                <p class="text-xl text-gray-600 text-balance">Comprehensive media solutions tailored to your needs</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+                <div class="service-card bg-gray-50 p-8 rounded-xl text-center">
+                    <div class="w-20 h-20 bg-red-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-camera text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Event Photography</h3>
+                    <p class="text-gray-600 mb-6 text-justify">
+                        Capture the special moments of your events with our professional photography services. We cover weddings, corporate events, parties, and more.
+                    </p>
+                    <ul class="text-left text-gray-600 mb-6 space-y-2">
+                        <li class="flex items-center"><i class="fas fa-check text-red-500 mr-2"></i> High-resolution images</li>
+                        <li class="flex items-center"><i class="fas fa-check text-red-500 mr-2"></i> Professional editing</li>
+                        <li class="flex items-center"><i class="fas fa-check text-red-500 mr-2"></i> Multiple photographers</li>
+                        <li class="flex items-center"><i class="fas fa-check text-red-500 mr-2"></i> Quick delivery</li>
+                    </ul>
+                    <button onclick="showPage('contact')" class="bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-full transition-colors">
+                        Book Now
+                    </button>
+                </div>
+
+                <div class="service-card bg-gray-50 p-8 rounded-xl text-center">
+                    <div class="w-20 h-20 bg-red-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-portrait text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Portrait Photography</h3>
+                    <p class="text-gray-600 mb-6 text-justify">
+                        Professional portrait sessions for individuals, families, and professionals. We create stunning images that capture personality and emotion.
+                    </p>
+                    <ul class="text-left text-gray-600 mb-6 space-y-2">
+                        <li class="flex items-center"><i class="fas fa-check text-red-500 mr-2"></i> Studio or location shoots</li>
+                        <li class="flex items-center"><i class="fas fa-check text-red-500 mr-2"></i> Professional lighting</li>
+                        <li class="flex items-center"><i class="fas fa-check text-red-500 mr-2"></i> Multiple outfit changes</li>
+                        <li class="flex items-center"><i class="fas fa-check text-red-500 mr-2"></i> Digital and print options</li>
+                    </ul>
+                    <button onclick="showPage('contact')" class="bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-full transition-colors">
+                        Book Now
+                    </button>
+                </div>
+
+                <div class="service-card bg-gray-50 p-8 rounded-xl text-center">
+                    <div class="w-20 h-20 bg-red-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-video text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Video Production</h3>
+                    <p class="text-gray-600 mb-6 text-justify">
+                        Full-service video production from concept to final edit. We create compelling videos for commercials, documentaries, events, and more.
+                    </p>
+                    <ul class="text-left text-gray-600 mb-6 space-y-2">
+                        <li class="flex items-center"><i class="fas fa-check text-red-500 mr-2"></i> Pre-production planning</li>
+                        <li class="flex items-center"><i class="fas fa-check text-red-500 mr-2"></i> Professional filming</li>
+                        <li class="flex items-center"><i class="fas fa-check text-red-500 mr-2"></i> Post-production editing</li>
+                        <li class="flex items-center"><i class="fas fa-check text-red-500 mr-2"></i> Multiple delivery formats</li>
+                    </ul>
+                    <button onclick="showPage('contact')" class="bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-full transition-colors">
+                        Book Now
+                    </button>
+                </div>
+
+                <div class="service-card bg-gray-50 p-8 rounded-xl text-center">
+                    <div class="w-20 h-20 bg-red-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-film text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Corporate Videography</h3>
+                    <p class="text-gray-600 mb-6 text-justify">
+                        Professional video services for businesses, including promotional videos, training materials, event coverage, and corporate documentaries.
+                    </p>
+                    <ul class="text-left text-gray-600 mb-6 space-y-2">
+                        <li class="flex items-center"><i class="fas fa-check text-red-500 mr-2"></i> Brand-aligned content</li>
+                        <li class="flex items-center"><i class="fas fa-check text-red-500 mr-2"></i> Professional scripting</li>
+                        <li class="flex items-center"><i class="fas fa-check text-red-500 mr-2"></i> High-quality audio</li>
+                        <li class="flex items-center"><i class="fas fa-check text-red-500 mr-2"></i> Multiple camera angles</li>
+                    </ul>
+                    <button onclick="showPage('contact')" class="bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-full transition-colors">
+                        Book Now
+                    </button>
+                </div>
+
+                <div class="service-card bg-gray-50 p-8 rounded-xl text-center">
+                    <div class="w-20 h-20 bg-red-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-paint-brush text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Graphic Design</h3>
+                    <p class="text-gray-600 mb-6 text-justify">
+                        Creative design solutions for branding, marketing materials, social media content, and custom graphics that make your brand stand out.
+                    </p>
+                    <ul class="text-left text-gray-600 mb-6 space-y-2">
+                        <li class="flex items-center"><i class="fas fa-check text-red-500 mr-2"></i> Logo design</li>
+                        <li class="flex items-center"><i class="fas fa-check text-red-500 mr-2"></i> Brand identity</li>
+                        <li class="flex items-center"><i class="fas fa-check text-red-500 mr-2"></i> Marketing materials</li>
+                        <li class="flex items-center"><i class="fas fa-check text-red-500 mr-2"></i> Social media graphics</li>
+                    </ul>
+                    <button onclick="showPage('contact')" class="bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-full transition-colors">
+                        Book Now
+                    </button>
+                </div>
+
+                <div class="service-card bg-gray-50 p-8 rounded-xl text-center">
+                    <div class="w-20 h-20 bg-red-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-podcast text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Podcast Production</h3>
+                    <p class="text-gray-600 mb-6 text-justify">
+                        End-to-end podcast production services including recording, editing, mixing, and distribution to major podcast platforms.
+                    </p>
+                    <ul class="text-left text-gray-600 mb-6 space-y-2">
+                        <li class="flex items-center"><i class="fas fa-check text-red-500 mr-2"></i> Professional recording</li>
+                        <li class="flex items-center"><i class="fas fa-check text-red-500 mr-2"></i> Audio editing & mixing</li>
+                        <li class="flex items-center"><i class="fas fa-check text-red-500 mr-2"></i> Show notes & metadata</li>
+                        <li class="flex items-center"><i class="fas fa-check text-red-500 mr-2"></i> Platform distribution</li>
+                    </ul>
+                    <button onclick="showPage('contact')" class="bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-full transition-colors">
+                        Book Now
+                    </button>
+                </div>
+            </div>
+
+            <div class="bg-gray-100 rounded-xl p-8 text-center">
+                <h3 class="text-3xl font-bold mb-4 gradient-text">Ready to Get Started?</h3>
+                <p class="text-xl text-gray-600 mb-6">Contact us today to discuss your project and get a customized quote</p>
+                <button onclick="showPage('contact')" class="bg-red-500 hover:bg-red-600 text-white px-8 py-3 rounded-full font-bold transition-colors hover-lift">
+                    Get Your Free Quote
+                </button>
             </div>
         </div>
     </section>
@@ -451,6 +782,20 @@
 
             <div class="flex justify-center items-center gap-4" id="video-pagination">
                 <!-- Pagination will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog-section" class="section-hidden py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 text-balance">MWAFFS MEDIA Blog</h2>
+                <p class="text-xl text-gray-600 text-balance">Insights, tips, and stories from the creative world</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="blog-posts">
+                <!-- Blog posts will be populated by JavaScript -->
             </div>
         </div>
     </section>
@@ -524,7 +869,7 @@
                     </div>
                 </div>
 
-                <div class="bg-gray-800 p-8 rounded-lg hover-lift">
+                <div class="bg-gray-800 p-8 rounded-lg hover-lift booking-form">
                     <h3 class="text-2xl font-bold mb-6">Send us a Message</h3>
                     <div class="space-y-4">
                         <div>
@@ -566,19 +911,78 @@
         <button onclick="closeModal()" class="absolute top-4 right-4 text-white hover:text-red-500 z-10 hover-lift">
             <i class="fas fa-times text-2xl"></i>
         </button>
+        
+        <button class="modal-nav-btn modal-prev" onclick="navigateMedia(-1)">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        
+        <button class="modal-nav-btn modal-next" onclick="navigateMedia(1)">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+        
         <div class="max-w-6xl max-h-[90vh]" onclick="event.stopPropagation()">
             <img id="modal-image" src="" alt="" class="max-w-full max-h-[90vh] object-contain rounded-lg">
             <div class="text-white text-center mt-4">
                 <h3 id="modal-title" class="text-2xl font-bold"></h3>
                 <p id="modal-category" class="text-gray-400 capitalize"></p>
+                <p id="modal-counter" class="text-gray-400 mt-2"></p>
             </div>
         </div>
     </div>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-8">
-        <div class="max-w-7xl mx-auto px-4 text-center">
-            <p>&copy; 2025 MWAFFS MEDIA. All rights reserved. | Designed with ❤️ in Malawi</p>
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">MWAFFS MEDIA</h3>
+                    <p class="text-gray-400 text-justify">
+                        Capturing Malawi's stories through creative excellence in photography, videography, and graphic design.
+                    </p>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><button onclick="showPage('home')" class="text-gray-400 hover:text-white transition-colors">Home</button></li>
+                        <li><button onclick="showPage('about')" class="text-gray-400 hover:text-white transition-colors">About</button></li>
+                        <li><button onclick="showPage('services')" class="text-gray-400 hover:text-white transition-colors">Services</button></li>
+                        <li><button onclick="showPage('contact')" class="text-gray-400 hover:text-white transition-colors">Contact</button></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Services</h3>
+                    <ul class="space-y-2">
+                        <li><button onclick="showPage('photography')" class="text-gray-400 hover:text-white transition-colors">Photography</button></li>
+                        <li><button onclick="showPage('videography')" class="text-gray-400 hover:text-white transition-colors">Videography</button></li>
+                        <li><button onclick="showPage('services')" class="text-gray-400 hover:text-white transition-colors">Graphic Design</button></li>
+                        <li><button onclick="showPage('services')" class="text-gray-400 hover:text-white transition-colors">Podcast Production</button></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Contact Info</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex items-start gap-2">
+                            <i class="fas fa-map-marker-alt mt-1 text-red-500"></i>
+                            <span>Blantyre, Southern Region, Malawi</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fas fa-phone text-red-500"></i>
+                            <span>+265 888 251 157</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fas fa-envelope text-red-500"></i>
+                            <span>mwaffsmedia@gmail.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="pt-8 border-t border-gray-800 text-center">
+                <p>&copy; 2025 MWAFFS MEDIA. All rights reserved. | Designed with ❤️ in Malawi</p>
+            </div>
         </div>
     </footer>
 
@@ -592,8 +996,11 @@
         let currentVideoPage = 0;
         let scrolled = false;
         let statsAnimated = false;
+        let currentTestimonialIndex = 0;
+        let currentModalIndex = 0;
+        let currentModalArray = [];
 
-        // Data - FIXED: Corrected duplicate IDs and file extensions
+        // Data - FIXED: Corrected image paths and file extensions
         const youtubeVideos = [
             { id: 'nZ5DNJTSoFs', title: 'Business Tips - Podcast Ep1', category: 'Mwaffs Media - Podcast' },
             { id: '9V1HfbEH1I4', title: 'Business Tips - Podcast Ep2', category: 'Mwaffs Media - Podcast' },
@@ -606,7 +1013,7 @@
             { id: 'Kg3zVcGCq8I', title: 'Special Ep with Bunda BSC', category: 'Mwaffs Media - Podcast' },
         ];
 
-        // Generate photo data - FIXED: Corrected duplicate IDs and file extensions
+        // Generate photo data - FIXED: Corrected image paths and file extensions
         const photos = [
             { id: 1, url: 'images/d1.jpg', title: 'Day Light Pictures', category: 'Day Pictures', aspect: 'portrait' },
             { id: 2, url: 'images/d2.jpg', title: 'Day Light Pictures', category: 'Day Pictures', aspect: 'portrait' },
@@ -625,38 +1032,90 @@
             { id: 15, url: 'images/photography/nps4.jpg', title: 'Night Pictures', category: 'Night Pictures', aspect: 'portrait' },
             { id: 16, url: 'images/photography/nps5.jpg', title: 'Night Pictures', category: 'Night Pictures', aspect: 'portrait' },
             { id: 17, url: 'images/photography/npc4.jpg', title: 'Night Pictures', category: 'Couple', aspect: 'portrait' },
-            { id: 18, url: 'images/photography/cd.jpg', title: 'Big Invents', category: 'Ivents', aspect: 'landscape' },
-            { id: 19, url: 'images/photography/cd1.jpg', title: 'Big Invents', category: 'Ivents', aspect: 'landscape' },
-            { id: 20, url: 'images/photography/cd3.jpg', title: 'Big Invents', category: 'Ivents', aspect: 'landscape' },
-            { id: 21, url: 'images/photography/npg1.jpg', title: 'Big Invents', category: 'Ivents', aspect: 'landscape' },
-            { id: 22, url: 'images/photography/npg2.jpg', title: 'Night Pictures', category: 'Ivents', aspect: 'landscape' },
-            { id: 23, url: 'images/photography/npg.jpg', title: 'Night Pictures', category: 'Ivents', aspect: 'landscape' },
+            { id: 18, url: 'images/photography/cd.jpg', title: 'Big Events', category: 'Events', aspect: 'landscape' },
+            { id: 19, url: 'images/photography/cd1.jpg', title: 'Big Events', category: 'Events', aspect: 'landscape' },
+            { id: 20, url: 'images/photography/cd3.jpg', title: 'Big Events', category: 'Events', aspect: 'landscape' },
+            { id: 21, url: 'images/photography/npg1.jpg', title: 'Big Events', category: 'Events', aspect: 'landscape' },
+            { id: 22, url: 'images/photography/npg2.jpg', title: 'Night Pictures', category: 'Events', aspect: 'landscape' },
+            { id: 23, url: 'images/photography/npg.jpg', title: 'Night Pictures', category: 'Events', aspect: 'landscape' },
             { id: 24, url: 'images/np2.jpg', title: 'Night Pictures', category: 'Night Pictures', aspect: 'portrait' },
-            { id: 25, url: 'images/ivents/tep.jpg', title: 'Big Ivents', category: 'Ivents', aspect: 'portrait' },
-            { id: 26, url: 'images/ivents/tep1.jpg', title: 'Big Ivents', category: 'Ivents', aspect: 'portrait' },
-            { id: 27, url: 'images/ivents/tep2.jpg', title: 'Big Ivents', category: 'Ivents', aspect: 'portrait' },
-            { id: 28, url: 'images/ivents/tep3.jpg', title: 'Big Ivents', category: 'Ivents', aspect: 'portrait' },
-            { id: 29, url: 'images/ivents/tep4.jpg', title: 'Big Ivents', category: 'Ivents', aspect: 'portrait' },
-            { id: 30, url: 'images/ivents/tep5.jpg', title: 'Big Ivents', category: 'Ivents', aspect: 'portrait' },
-            { id: 31, url: 'images/ivents/tep6.jpg', title: 'Big Ivents', category: 'Ivents', aspect: 'portrait' },
-            { id: 32, url: 'images/ivents/tep7.jpg', title: 'Big Ivents', category: 'Ivents', aspect: 'portrait' },
-            { id: 33, url: 'images/ivents/tep8.jpg', title: 'Big Ivents', category: 'Ivents', aspect: 'portrait' },
-            { id: 34, url: 'images/ivents/tep9.jpg', title: 'Big Ivents', category: 'Ivents', aspect: 'portrait' },
-            { id: 35, url: 'images/ivents/tep10.jpg', title: 'Big Ivents', category: 'Ivents', aspect: 'portrait' },
-            { id: 36, url: 'images/ivents/tep11.jpg', title: 'Big Ivents', category: 'Ivents', aspect: 'portrait' },
-            { id: 37, url: 'images/ivents/tep12.jpg', title: 'Big Ivents', category: 'Ivents', aspect: 'portrait' },
-            { id: 38, url: 'images/ivents/tep13.jpg', title: 'Big Ivents', category: 'Ivents', aspect: 'portrait' },
+            { id: 25, url: 'images/ivents/tep.jpg', title: 'Big Events', category: 'Events', aspect: 'portrait' },
+            { id: 26, url: 'images/ivents/tep1.jpg', title: 'Big Events', category: 'Events', aspect: 'portrait' },
+            { id: 27, url: 'images/ivents/tep2.jpg', title: 'Big Events', category: 'Events', aspect: 'portrait' },
+            { id: 28, url: 'images/ivents/tep3.jpg', title: 'Big Events', category: 'Events', aspect: 'portrait' },
+            { id: 29, url: 'images/ivents/tep4.jpg', title: 'Big Events', category: 'Events', aspect: 'portrait' },
+            { id: 30, url: 'images/ivents/tep5.jpg', title: 'Big Events', category: 'Events', aspect: 'portrait' },
+            { id: 31, url: 'images/ivents/tep6.jpg', title: 'Big Events', category: 'Events', aspect: 'portrait' },
+            { id: 32, url: 'images/ivents/tep7.jpg', title: 'Big Events', category: 'Events', aspect: 'portrait' },
+            { id: 33, url: 'images/ivents/tep8.jpg', title: 'Big Events', category: 'Events', aspect: 'portrait' },
+            { id: 34, url: 'images/ivents/tep9.jpg', title: 'Big Events', category: 'Events', aspect: 'portrait' },
+            { id: 35, url: 'images/ivents/tep10.jpg', title: 'Big Events', category: 'Events', aspect: 'portrait' },
+            { id: 36, url: 'images/ivents/tep11.jpg', title: 'Big Events', category: 'Events', aspect: 'portrait' },
+            { id: 37, url: 'images/ivents/tep12.jpg', title: 'Big Events', category: 'Events', aspect: 'portrait' },
+            { id: 38, url: 'images/ivents/tep13.jpg', title: 'Big Events', category: 'Events', aspect: 'portrait' },
             { id: 39, url: 'images/np2.jpg', title: 'Night Pictures', category: 'Night Pictures', aspect: 'portrait' },
-            { id: 40, url: 'images/ivents/te.jpg', title: 'Big Invents ', category: 'Ivents', aspect: 'landscape' },
-            { id: 41, url: 'images/ivents/te1.jpg', title: 'Big Invents ', category: 'Ivents', aspect: 'landscape' },
-            { id: 43, url: 'images/ivents/te7.jpg', title: 'Big Invents ', category: 'Ivents', aspect: 'landscape' },
-            { id: 44, url: 'images/ivents/te3.jpg', title: 'Big Invents ', category: 'Ivents', aspect: 'landscape' },
-            { id: 45, url: 'images/ivents/te4.jpg', title: 'Big Invents ', category: 'Ivents', aspect: 'landscape' },
-            { id: 46, url: 'images/ivents/te5.jpg', title: 'Big Invents ', category: 'Ivents', aspect: 'landscape' },
-            { id: 47, url: 'images/ivents/te6.jpg', title: 'Big Invents ', category: 'Ivents', aspect: 'landscape' },
-            { id: 48, url: 'images/ivents/te8.jpg', title: 'Big Invents ', category: 'Ivents', aspect: 'landscape' },
-            { id: 49, url: 'images/ivents/te9.jpg', title: 'Big Invents ', category: 'Ivents', aspect: 'landscape' },
-            { id: 50, url: 'images/ivents/te10.jpg', title: 'Big Invents ', category: 'Ivents', aspect: 'landscape' }
+            { id: 40, url: 'images/ivents/te.jpg', title: 'Big Events', category: 'Events', aspect: 'landscape' },
+            { id: 41, url: 'images/ivents/te1.jpg', title: 'Big Events', category: 'Events', aspect: 'landscape' },
+            { id: 43, url: 'images/ivents/te7.jpg', title: 'Big Events', category: 'Events', aspect: 'landscape' },
+            { id: 44, url: 'images/ivents/te3.jpg', title: 'Big Events', category: 'Events', aspect: 'landscape' },
+            { id: 45, url: 'images/ivents/te4.jpg', title: 'Big Events', category: 'Events', aspect: 'landscape' },
+            { id: 46, url: 'images/ivents/te5.jpg', title: 'Big Events', category: 'Events', aspect: 'landscape' },
+            { id: 47, url: 'images/ivents/te6.jpg', title: 'Big Events', category: 'Events', aspect: 'landscape' },
+            { id: 48, url: 'images/ivents/te8.jpg', title: 'Big Events', category: 'Events', aspect: 'landscape' },
+            { id: 49, url: 'images/ivents/te9.jpg', title: 'Big Events', category: 'Events', aspect: 'landscape' },
+            { id: 50, url: 'images/ivents/te10.jpg', title: 'Big Events', category: 'Events', aspect: 'landscape' }
+        ];
+
+        // Blog posts data
+        const blogPosts = [
+            { 
+                id: 1, 
+                title: 'The Art of Storytelling Through Photography', 
+                excerpt: 'Learn how to capture compelling narratives in your photographs that resonate with viewers and tell powerful stories.',
+                image: 'images/blog/storytelling.jpg',
+                date: 'March 15, 2025',
+                category: 'Photography Tips'
+            },
+            { 
+                id: 2, 
+                title: '5 Essential Video Production Tips for Beginners', 
+                excerpt: 'Discover the fundamental techniques that will elevate your video production quality and engage your audience effectively.',
+                image: 'images/blog/video-tips.jpg',
+                date: 'March 10, 2025',
+                category: 'Videography'
+            },
+            { 
+                id: 3, 
+                title: 'How to Choose the Right Media Company for Your Event', 
+                excerpt: 'A comprehensive guide to selecting the perfect media partner to capture your special moments with professionalism and creativity.',
+                image: 'images/blog/choose-media.jpg',
+                date: 'March 5, 2025',
+                category: 'Advice'
+            },
+            { 
+                id: 4, 
+                title: 'The Power of Visual Branding in the Digital Age', 
+                excerpt: 'Explore how strong visual branding can transform your business presence and connect with your target audience more effectively.',
+                image: 'images/blog/visual-branding.jpg',
+                date: 'February 28, 2025',
+                category: 'Graphic Design'
+            },
+            { 
+                id: 5, 
+                title: 'Behind the Scenes: Capturing Malawi\'s Cultural Events', 
+                excerpt: 'A look at how we document and preserve the rich cultural heritage of Malawi through our lens and creative vision.',
+                image: 'images/blog/cultural-events.jpg',
+                date: 'February 20, 2025',
+                category: 'Behind the Scenes'
+            },
+            { 
+                id: 6, 
+                title: 'Podcasting 101: Equipment and Setup for Quality Audio', 
+                excerpt: 'Everything you need to know about starting your own podcast with professional-quality audio on any budget.',
+                image: 'images/blog/podcasting.jpg',
+                date: 'February 15, 2025',
+                category: 'Podcasting'
+            }
         ];
 
         const photosPerPage = 12;
@@ -666,9 +1125,9 @@
         const teamMembers = [
             { name: 'Precious Mataka', position: 'CEO & Co-Founder', bio: 'Precious Mataka is the visionary co-founder and Chief Executive Officer of Mwaffs Media. He leads the overall strategic direction, drives innovation, and ensures the company remains true to its mission of high-quality multimedia storytelling. Under her leadership, the company has developed a reputation for creativity, reliability, and excellence. Precious also maintains strong relationships with clients, stakeholders, and partners, guiding growth and sustainability.', image: 'images/Precious.png', aspect: 'portrait' },
             { name: 'Praise Bwanali', position: 'CEO & Co-Founder', bio: 'Praise Bwanali co-leads Mwaffs Media alongside Precious, bringing complementary strength in operations, creative direction, and client relations. As Co-Founder and co-CEO, Praise ensures that the business workflows, production pipelines, and quality standards are maintained across all projects. His leadership helps balance artistic ambition with operational efficiency, fostering cohesion and consistency across teams.', image: 'images/Praise.jpg', aspect: 'portrait' },
-            { name: 'Grant Mliule', position: 'Managing Director', bio: 'As Managing Director, Grant oversees the day-to-day operations and ensures that the company’s strategic vision is executed effectively. He coordinates among departments, ensures resource allocation, and monitors project delivery timelines. Grant is instrumental in translating high-level direction from the CEOs into actionable plans, and he maintains accountability to quality, budget, and client satisfaction.', image: 'images/Grant.jpg', aspect: 'portrait' },
+            { name: 'Grant Mliule', position: 'Managing Director', bio: 'As Managing Director, Grant oversees the day-to-day operations and ensures that the company\'s strategic vision is executed effectively. He coordinates among departments, ensures resource allocation, and monitors project delivery timelines. Grant is instrumental in translating high-level direction from the CEOs into actionable plans, and he maintains accountability to quality, budget, and client satisfaction.', image: 'images/Grant.jpg', aspect: 'portrait' },
             { name: 'Fatsani Munkhondya', position: 'Secretary', bio: 'Fatsani Mukhodya serves as Secretary, managing internal governance, documentation, and corporate compliance. She ensures that legal, regulatory, and administrative tasks are properly handled, minutes are recorded, and communications between leadership and teams are clear and efficient. Her role is critical in ensuring smooth internal coordination and maintaining professionalism in all corporate processes.', image: 'images/Fatsani.jpeg', aspect: 'portrait' },
-            { name: 'Charles Luwe', position: 'Marketing Director', bio: 'leads the marketing efforts of Mwaffs Media as Marketing Manager. He develops and executes marketing strategies across social media, campaigns, and brand outreach, helping to attract new clients and strengthen the brand’s image. Charles analyzes market trends, positions the company among competitors, and crafts messaging that resonates with target audiences. His work ensures that Mwaffs Media’s creativity is also visible and compelling to potential customers.', image: 'images/mwaffs.png', aspect: 'portrait' },
+            { name: 'Charles Luwe', position: 'Marketing Director', bio: 'leads the marketing efforts of Mwaffs Media as Marketing Manager. He develops and executes marketing strategies across social media, campaigns, and brand outreach, helping to attract new clients and strengthen the brand\'s image. Charles analyzes market trends, positions the company among competitors, and crafts messaging that resonates with target audiences. His work ensures that Mwaffs Media\'s creativity is also visible and compelling to potential customers.', image: 'images/mwaffs.png', aspect: 'portrait' },
             { name: 'Alexander Makuluni', position: 'Deputy Marketing Director', bio: 'As Deputy Marketing Manager, Alexander Makuluni supports Charles in executing marketing initiatives and enhancing brand presence. He may manage specific campaigns, content creation, social media engagement, or community outreach. Alexander helps optimize marketing efforts, track performance metrics, and coordinate with the creative team to ensure alignment between marketing and production.', image: 'images/Alexander.jpg', aspect: 'portrait' },
             { name: 'Watson S. Banda', position: 'Chief Whipper', bio: 'Watson Banda holds the role of Chief Whipper—an influential title that underscores his role in maintaining high energy, morale, and discipline across the creative and operational teams. Watson is a motivator, cultural leader, and guardian of work ethic. He ensures that deadlines are met, that teams are pushed to deliver their best, and that the studio environment remains dynamic, enthusiastic, and professional.', image: 'images/Watson.jpeg', aspect: 'landscape' }
         ];
@@ -680,7 +1139,7 @@
             { name: 'Fortunate Phiri', role: 'Former BSC Ebtertainment Direstor', text: 'Working with Mwaffs Media was a pleasure during my tenure as Executive Director at LUANAR Bunda Campus. They understood our vision and delivered exceptional coverage of our activities, including the 2025 Mr. and Mrs. LUANAR event.' },
             { name: 'Baxton Chipeta', role: 'Poet', text: 'The video they produced for my poem on promoting African languages is incredible! Their creativity and attention to detail are unmatched in Malawi.' },
             { name: 'Chisomo Banda', role: 'Graduation Client - Nurse at Zomba Central Hospital', text: 'Mwaffs Media beautifully captured memorable moments at our 2024 Malawi College of Health Sciences event held at BICC. I truly cherish their work — professional, reliable, and exceptional in every way.' },
-            { name: 'Awesome Kingstone Makwenda', role: 'Content Creator & Comedian', text: 'I had a great chat and connected with my fans on the Mwaffs Media YouTube channel. During our conversation, I realized that through comedy and content creation, we don’t just bring happiness to people’s faces—we also offer solutions to their everyday challenges. Keep up the great work!.' }
+            { name: 'Awesome Kingstone Makwenda', role: 'Content Creator & Comedian', text: 'I had a great chat and connected with my fans on the Mwaffs Media YouTube channel. During our conversation, I realized that through comedy and content creation, we don\'t just bring happiness to people\'s faces—we also offer solutions to their everyday challenges. Keep up the great work!.' }
         ];
 
         // Featured photos for homepage with aspect ratios
@@ -731,6 +1190,10 @@
                 initTeamPage();
             } else if (page === 'home') {
                 initHomePage();
+            } else if (page === 'services') {
+                initServicesPage();
+            } else if (page === 'blog') {
+                initBlogPage();
             }
         }
 
@@ -749,7 +1212,7 @@
                     
                     return `
                         <div
-                            onclick="openModal(${JSON.stringify(photo).replace(/"/g, '&quot;')}, 'image')"
+                            onclick="openModal(${JSON.stringify(photo).replace(/"/g, '&quot;')}, 'image', ${featuredPhotos.indexOf(photo)}, featuredPhotos)"
                             class="image-container relative group cursor-pointer overflow-hidden rounded-lg shadow-lg transform hover:scale-105 transition-all duration-300 ${aspectClass} bg-gray-200 hover-lift"
                         >
                             <img src="${photo.url}" alt="${photo.title}" class="w-full h-full object-cover loading-pulse" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'w-full h-full flex items-center justify-center bg-gradient-to-br from-red-400 to-orange-500 text-white font-bold\'>Image Loading</div>'">
@@ -788,30 +1251,31 @@
                 `).join('');
             }
             
-            // Render testimonials
-            const testimonialsContainer = document.getElementById('testimonials-scroll');
-            if (testimonialsContainer) {
-                // Duplicate testimonials for seamless scrolling
-                const duplicatedTestimonials = [...testimonials, ...testimonials];
+            // Render testimonials slider
+            initTestimonialsSlider();
+            
+            // Render blog preview
+            const blogPreviewContainer = document.getElementById('blog-preview');
+            if (blogPreviewContainer) {
+                const previewPosts = blogPosts.slice(0, 3); // Get first 3 posts
                 
-                testimonialsContainer.innerHTML = duplicatedTestimonials.map(testimonial => `
-                    <div class="min-w-[350px] bg-white p-6 rounded-lg shadow-lg hover-lift">
-                        <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 rounded-full bg-red-500 flex items-center justify-center text-white font-bold">
-                                ${testimonial.name.charAt(0)}
-                            </div>
-                            <div class="ml-4">
-                                <h4 class="font-bold text-gray-800">${testimonial.name}</h4>
-                                <p class="text-sm text-gray-600">${testimonial.role}</p>
+                blogPreviewContainer.innerHTML = previewPosts.map(post => `
+                    <div class="blog-card bg-white rounded-lg overflow-hidden shadow-lg">
+                        <div class="h-48 bg-gradient-to-br from-red-400 to-orange-500 overflow-hidden">
+                            <div class="w-full h-full flex items-center justify-center text-white font-bold">
+                                ${post.title}
                             </div>
                         </div>
-                        <p class="text-gray-700 italic text-justify">"${testimonial.text}"</p>
-                        <div class="flex text-yellow-400 mt-4">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
+                        <div class="p-6">
+                            <span class="text-red-500 text-sm font-semibold">${post.category}</span>
+                            <h3 class="text-xl font-bold my-2">${post.title}</h3>
+                            <p class="text-gray-600 mb-4 text-justify">${post.excerpt}</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-500 text-sm">${post.date}</span>
+                                <button onclick="showPage('blog')" class="text-red-500 hover:text-red-600 font-semibold text-sm">
+                                    Read More <i class="fas fa-arrow-right ml-1"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 `).join('');
@@ -822,15 +1286,88 @@
                 animateStatistics();
                 statsAnimated = true;
             }
+            
+            // Add fade-in animations to elements
+            addFadeInAnimations();
+        }
+
+        function initTestimonialsSlider() {
+            const track = document.getElementById('testimonial-track');
+            const dotsContainer = document.getElementById('testimonial-dots');
+            
+            if (track && dotsContainer) {
+                track.innerHTML = testimonials.map((testimonial, index) => `
+                    <div class="testimonial-slide min-w-full p-4">
+                        <div class="bg-white p-8 rounded-lg shadow-lg max-w-2xl mx-auto">
+                            <div class="flex items-center mb-6">
+                                <div class="w-16 h-16 rounded-full bg-red-500 flex items-center justify-center text-white font-bold text-xl">
+                                    ${testimonial.name.charAt(0)}
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="font-bold text-gray-800 text-xl">${testimonial.name}</h4>
+                                    <p class="text-gray-600">${testimonial.role}</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-700 italic text-xl text-justify">"${testimonial.text}"</p>
+                            <div class="flex text-yellow-400 mt-6 text-xl">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+                
+                dotsContainer.innerHTML = testimonials.map((_, index) => `
+                    <button onclick="goToTestimonial(${index})" class="w-3 h-3 rounded-full mx-1 ${index === 0 ? 'bg-red-500' : 'bg-gray-300'}"></button>
+                `).join('');
+                
+                updateTestimonialSlider();
+            }
+        }
+
+        function updateTestimonialSlider() {
+            const track = document.getElementById('testimonial-track');
+            if (track) {
+                track.style.transform = `translateX(-${currentTestimonialIndex * 100}%)`;
+            }
+            
+            const dots = document.querySelectorAll('#testimonial-dots button');
+            dots.forEach((dot, index) => {
+                if (index === currentTestimonialIndex) {
+                    dot.classList.add('bg-red-500');
+                    dot.classList.remove('bg-gray-300');
+                } else {
+                    dot.classList.remove('bg-red-500');
+                    dot.classList.add('bg-gray-300');
+                }
+            });
+        }
+
+        function nextTestimonial() {
+            currentTestimonialIndex = (currentTestimonialIndex + 1) % testimonials.length;
+            updateTestimonialSlider();
+        }
+
+        function prevTestimonial() {
+            currentTestimonialIndex = (currentTestimonialIndex - 1 + testimonials.length) % testimonials.length;
+            updateTestimonialSlider();
+        }
+
+        function goToTestimonial(index) {
+            currentTestimonialIndex = index;
+            updateTestimonialSlider();
         }
 
         // Animate statistics counting up
         function animateStatistics() {
             const statElements = [
                 { id: 'stat-projects', target: 500 },
-                { id: 'stat-years', target: 4 },
-                { id: 'stat-clients', target: 100 },
-                { id: 'stat-Recommendations', target: 50 }
+                { id: 'stat-years', target: 8 },
+                { id: 'stat-clients', target: 200 },
+                { id: 'stat-awards', target: 50 }
             ];
             
             statElements.forEach(stat => {
@@ -850,6 +1387,13 @@
             });
         }
 
+        function addFadeInAnimations() {
+            const elements = document.querySelectorAll('.fade-in-up');
+            elements.forEach((el, index) => {
+                el.style.animationDelay = `${index * 0.2}s`;
+            });
+        }
+
         function toggleMobileMenu() {
             const mobileMenu = document.getElementById('mobile-menu');
             if (mobileMenuOpen) {
@@ -865,7 +1409,7 @@
         function initPhotographyPage() {
             // Populate categories
             const categoriesContainer = document.getElementById('photo-categories');
-            const categories = ['all', 'Day Pictures', 'Night Pictures', 'Portrait'];
+            const categories = ['all', 'Day Pictures', 'Night Pictures', 'Couple', 'Events'];
             
             if (categoriesContainer) {
                 categoriesContainer.innerHTML = categories.map(cat => `
@@ -890,7 +1434,7 @@
         }
 
         function updatePhotoCategories() {
-            const categories = ['all', 'Day Pictures', 'Night Pictures', 'Portrait'];
+            const categories = ['all', 'Day Pictures', 'Night Pictures', 'Couple', 'Events'];
             const buttons = document.querySelectorAll('#photo-categories button');
             
             buttons.forEach((btn, index) => {
@@ -916,7 +1460,7 @@
             // Render photo gallery
             const galleryContainer = document.getElementById('photo-gallery');
             if (galleryContainer) {
-                galleryContainer.innerHTML = displayPhotos.map(photo => {
+                galleryContainer.innerHTML = displayPhotos.map((photo, index) => {
                     // Determine aspect ratio class based on the aspect property
                     let aspectClass = 'aspect-square'; // default
                     if (photo.aspect === 'portrait') {
@@ -927,7 +1471,7 @@
                     
                     return `
                         <div
-                            onclick="openModal(${JSON.stringify(photo).replace(/"/g, '&quot;')}, 'image')"
+                            onclick="openModal(${JSON.stringify(photo).replace(/"/g, '&quot;')}, 'image', ${startIdx + index}, filteredPhotos)"
                             class="image-container relative group cursor-pointer overflow-hidden rounded-lg shadow-lg transform hover:scale-105 transition-all duration-300 ${aspectClass} bg-gray-200 hover-lift"
                         >
                             <img src="${photo.url}" alt="${photo.title}" class="w-full h-full object-cover loading-pulse" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'w-full h-full flex items-center justify-center bg-gradient-to-br from-red-400 to-orange-500 text-white font-bold\'>Image Loading</div>'">
@@ -1052,6 +1596,36 @@
             }
         }
 
+        function initServicesPage() {
+            // Services page is mostly static HTML, but we can add any dynamic content here if needed
+        }
+
+        function initBlogPage() {
+            const blogContainer = document.getElementById('blog-posts');
+            if (blogContainer) {
+                blogContainer.innerHTML = blogPosts.map(post => `
+                    <div class="blog-card bg-white rounded-lg overflow-hidden shadow-lg">
+                        <div class="h-48 bg-gradient-to-br from-red-400 to-orange-500 overflow-hidden">
+                            <div class="w-full h-full flex items-center justify-center text-white font-bold text-center p-4">
+                                ${post.title}
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <span class="text-red-500 text-sm font-semibold">${post.category}</span>
+                            <h3 class="text-xl font-bold my-2">${post.title}</h3>
+                            <p class="text-gray-600 mb-4 text-justify">${post.excerpt}</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-500 text-sm">${post.date}</span>
+                                <button class="text-red-500 hover:text-red-600 font-semibold text-sm">
+                                    Read More <i class="fas fa-arrow-right ml-1"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
         function initTeamPage() {
             const teamContainer = document.getElementById('team-members');
             if (teamContainer) {
@@ -1078,22 +1652,50 @@
             }
         }
 
-        function openModal(media, type) {
+        function openModal(media, type, index = 0, array = []) {
             selectedMedia = { ...media, type };
+            currentModalIndex = index;
+            currentModalArray = array;
+            
             const modal = document.getElementById('media-modal');
             const modalImage = document.getElementById('modal-image');
             const modalTitle = document.getElementById('modal-title');
             const modalCategory = document.getElementById('modal-category');
+            const modalCounter = document.getElementById('modal-counter');
             
             if (type === 'image') {
                 modalImage.src = media.url;
                 modalImage.alt = media.title;
                 modalTitle.textContent = media.title;
                 modalCategory.textContent = media.category;
+                
+                if (array && array.length > 1) {
+                    modalCounter.textContent = `${index + 1} of ${array.length}`;
+                } else {
+                    modalCounter.textContent = '';
+                }
             }
             
             modal.classList.remove('modal-hidden');
             modal.classList.add('modal-visible', 'flex');
+        }
+
+        function navigateMedia(direction) {
+            if (currentModalArray && currentModalArray.length > 1) {
+                currentModalIndex = (currentModalIndex + direction + currentModalArray.length) % currentModalArray.length;
+                const media = currentModalArray[currentModalIndex];
+                
+                const modalImage = document.getElementById('modal-image');
+                const modalTitle = document.getElementById('modal-title');
+                const modalCategory = document.getElementById('modal-category');
+                const modalCounter = document.getElementById('modal-counter');
+                
+                modalImage.src = media.url;
+                modalImage.alt = media.title;
+                modalTitle.textContent = media.title;
+                modalCategory.textContent = media.category;
+                modalCounter.textContent = `${currentModalIndex + 1} of ${currentModalArray.length}`;
+            }
         }
 
         function closeModal() {
@@ -1101,6 +1703,7 @@
             modal.classList.remove('modal-visible', 'flex');
             modal.classList.add('modal-hidden');
             selectedMedia = null;
+            currentModalArray = [];
         }
 
         // Scroll handler
@@ -1152,6 +1755,9 @@
             
             // Initialize homepage content
             initHomePage();
+            
+            // Auto-advance testimonials
+            setInterval(nextTestimonial, 5000);
         });
     </script>
 </body>
