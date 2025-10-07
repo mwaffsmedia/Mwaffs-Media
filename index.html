@@ -39,6 +39,23 @@
         .testimonial-container:hover .testimonial-scroll {
             animation-play-state: paused;
         }
+        
+        /* Image styling fixes */
+        .image-container {
+            position: relative;
+            overflow: hidden;
+        }
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+        .team-image {
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
     </style>
 </head>
 <body class="bg-white min-h-screen">
@@ -47,7 +64,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
                 <div class="flex items-center gap-3 cursor-pointer" onclick="showPage('home')">
-                    <img src="images/logo.png" alt="MWAFFS MEDIA Logo" class="h-8 w-auto">
+                    <img src="images/logo.png" alt="MWAFFS MEDIA Logo" class="h-8 w-auto" onerror="this.style.display='none'">
                     <span class="text-white text-2xl font-bold">MWAFFS MEDIA</span>
                 </div>
                 
@@ -514,11 +531,11 @@
 
         // Generate photo data - FIXED: Corrected duplicate IDs and file extensions
         const photos = [
-            { id: 1, url: 'images/d1.jpg', title: 'Day Pictures', category: 'Day Pictures' },
-            { id: 2, url: 'images/d2.jpg', title: 'Day Pictures', category: 'Day Pictures' },
-            { id: 3, url: 'images/np1.jpg', title: 'Night Pictures', category: 'Night Pictures' },
-            { id: 4, url: 'images/np2.jpg', title: 'Night Pictures', category: 'Night Pictures' },
-            { id: 5, url: 'images/np3.jpg', title: 'Night Pictures', category: 'Night Pictures' },
+            { id: 1, url: 'images/d1.png', title: 'Day Pictures', category: 'Day Pictures' },
+            { id: 2, url: 'images/d2.png', title: 'Day Pictures', category: 'Day Pictures' },
+            { id: 3, url: 'images/np1.png', title: 'Night Pictures', category: 'Night Pictures' },
+            { id: 4, url: 'images/np2.png', title: 'Night Pictures', category: 'Night Pictures' },
+            { id: 5, url: 'images/np3.png', title: 'Night Pictures', category: 'Night Pictures' },
             { id: 6, url: 'images/Praise.jpg', title: 'Team Member', category: 'Portrait' }
         ];
 
@@ -604,9 +621,9 @@
                 featuredPhotosContainer.innerHTML = featuredPhotos.map(photo => `
                     <div
                         onclick="openModal(${JSON.stringify(photo).replace(/"/g, '&quot;')}, 'image')"
-                        class="relative group cursor-pointer overflow-hidden rounded-lg shadow-lg transform hover:scale-105 transition-all duration-300"
+                        class="image-container relative group cursor-pointer overflow-hidden rounded-lg shadow-lg transform hover:scale-105 transition-all duration-300 h-64 bg-gray-200"
                     >
-                        <img src="${photo.url}" alt="${photo.title}" class="w-full h-64 object-cover">
+                        <img src="${photo.url}" alt="${photo.title}" class="w-full h-full object-cover" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'w-full h-full flex items-center justify-center bg-gradient-to-br from-red-400 to-orange-500 text-white font-bold\'>Image Loading</div>'">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
                             <div class="text-white">
                                 <h3 class="font-bold">${photo.title}</h3>
@@ -740,9 +757,9 @@
                 galleryContainer.innerHTML = displayPhotos.map(photo => `
                     <div
                         onclick="openModal(${JSON.stringify(photo).replace(/"/g, '&quot;')}, 'image')"
-                        class="relative group cursor-pointer overflow-hidden rounded-lg shadow-lg transform hover:scale-105 transition-all duration-300"
+                        class="image-container relative group cursor-pointer overflow-hidden rounded-lg shadow-lg transform hover:scale-105 transition-all duration-300 h-64 bg-gray-200"
                     >
-                        <img src="${photo.url}" alt="${photo.title}" class="w-full h-64 object-cover">
+                        <img src="${photo.url}" alt="${photo.title}" class="w-full h-full object-cover" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'w-full h-full flex items-center justify-center bg-gradient-to-br from-red-400 to-orange-500 text-white font-bold\'>Image Loading</div>'">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
                             <div class="text-white">
                                 <h3 class="font-bold">${photo.title}</h3>
@@ -868,7 +885,7 @@
             if (teamContainer) {
                 teamContainer.innerHTML = teamMembers.map(member => `
                     <div class="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow">
-                        <div class="h-64 bg-cover bg-center" style="background-image: url('${member.image}')"></div>
+                        <div class="h-64 team-image bg-gradient-to-br from-red-400 to-orange-500" style="background-image: url('${member.image}')"></div>
                         <div class="p-6">
                             <h3 class="text-xl font-bold mb-2">${member.name}</h3>
                             <p class="text-red-500 font-semibold mb-3">${member.position}</p>
