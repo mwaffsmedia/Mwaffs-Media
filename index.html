@@ -608,26 +608,26 @@
 
         // Generate photo data - FIXED: Corrected duplicate IDs and file extensions
         const photos = [
-            { id: 1, url: 'images/d1.jpg', title: 'Day Pictures', category: 'Day Pictures' },
-            { id: 2, url: 'images/d2.jpg', title: 'Day Pictures', category: 'Day Pictures' },
-            { id: 3, url: 'images/np1.jpg', title: 'Night Pictures', category: 'Night Pictures' },
-            { id: 4, url: 'images/np2.jpg', title: 'Night Pictures', category: 'Night Pictures' },
-            { id: 5, url: 'images/np3.jpg', title: 'Night Pictures', category: 'Night Pictures' },
-            { id: 6, url: 'images/Praise.jpg', title: 'Team Member', category: 'Portrait' }
+            { id: 1, url: 'images/d1.jpg', title: 'Day Pictures', category: 'Day Pictures', aspect: 'portrait' },
+            { id: 2, url: 'images/d2.jpg', title: 'Day Pictures', category: 'Day Pictures', aspect: 'portrait' },
+            { id: 3, url: 'images/np1.jpg', title: 'Night Pictures', category: 'Night Pictures', aspect: 'square' },
+            { id: 4, url: 'images/np2.jpg', title: 'Night Pictures', category: 'Night Pictures', aspect: 'portrait' },
+            { id: 5, url: 'images/np3.jpg', title: 'Night Pictures', category: 'Night Pictures', aspect: 'square' },
+            { id: 6, url: 'images/Praise.jpg', title: 'Team Member', category: 'Portrait', aspect: 'portrait' }
         ];
 
         const photosPerPage = 12;
         const videosPerPage = 6;
 
-        // Team members data
+        // Team members data with aspect ratio specifications
         const teamMembers = [
-            { name: 'Precious Mataka', position: 'CEO', bio: 'Co-Founder leading with creativity, vision, and innovation.', image: 'images/Precious.png' },
-            { name: 'Praise Bwanali', position: 'CEO', bio: 'Creative director with extensive photography experience.', image: 'images/Praise.jpg' },
-            { name: 'Grant Mliule', position: 'Managing Director', bio: 'Strategic leader overseeing operations.', image: 'images/Grant.jpg' },
-            { name: 'Fatsani Munkhondya', position: 'Secretary', bio: 'Ensures effective communication and organization.', image: 'images/Fatsani.jpeg' },
-            { name: 'Charles Luwe', position: 'Marketing Director', bio: 'Leads creative marketing strategies.', image: 'images/mwaffs.png' },
-            { name: 'Alexander Makuluni', position: 'Deputy Marketing Director', bio: 'Supports marketing with fresh ideas.', image: 'images/Alexander.jpg' },
-            { name: 'Watson S. Banda', position: 'Chief Whipper', bio: 'Energizes and motivates the team.', image: 'images/Watson.jpeg' }
+            { name: 'Precious Mataka', position: 'CEO', bio: 'Co-Founder leading with creativity, vision, and innovation.', image: 'images/Precious.png', aspect: 'portrait' },
+            { name: 'Praise Bwanali', position: 'CEO', bio: 'Creative director with extensive photography experience.', image: 'images/Praise.jpg', aspect: 'portrait' },
+            { name: 'Grant Mliule', position: 'Managing Director', bio: 'Strategic leader overseeing operations.', image: 'images/Grant.jpg', aspect: 'square' },
+            { name: 'Fatsani Munkhondya', position: 'Secretary', bio: 'Ensures effective communication and organization.', image: 'images/Fatsani.jpeg', aspect: 'portrait' },
+            { name: 'Charles Luwe', position: 'Marketing Director', bio: 'Leads creative marketing strategies.', image: 'images/mwaffs.png', aspect: 'square' },
+            { name: 'Alexander Makuluni', position: 'Deputy Marketing Director', bio: 'Supports marketing with fresh ideas.', image: 'images/Alexander.jpg', aspect: 'square' },
+            { name: 'Watson S. Banda', position: 'Chief Whipper', bio: 'Energizes and motivates the team.', image: 'images/Watson.jpeg', aspect: 'landscape' }
         ];
 
         // Testimonials data
@@ -640,12 +640,12 @@
             { name: 'James Nthala', role: 'Real Estate Developer', text: 'Their architectural photography showcases our properties in the best light possible. Professional and reliable service every time.' }
         ];
 
-        // Featured photos for homepage
+        // Featured photos for homepage with aspect ratios
         const featuredPhotos = [
-            { id: 1, url: 'images/d1.png', title: 'A Girl in a Day Light Photo', category: 'Day light Pictures' },
-            { id: 2, url: 'images/d2.png', title: 'A young-man in a Day Light Photo', category: 'Day light Pictures' },
-            { id: 3, url: 'images/np1.png', title: 'A Girl in a Night Photo', category: 'Night Pictures' },
-            { id: 4, url: 'images/np2.png', title: 'A Girl in a Night Photo', category: 'Night Pictures' }
+            { id: 1, url: 'images/d1.jpg', title: 'A Girl in a Day Light Photo', category: 'Day light Pictures', aspect: 'portrait' },
+            { id: 2, url: 'images/d2.jpg', title: 'A young-man in a Day Light Photo', category: 'Day light Pictures', aspect: 'portrait' },
+            { id: 3, url: 'images/np1.jpg', title: 'A Girl in a Night Photo', category: 'Night Pictures', aspect: 'square' },
+            { id: 4, url: 'images/np2.jpg', title: 'A Girl in a Night Photo', category: 'Night Pictures', aspect: 'portrait' }
         ];
 
         // DOM manipulation functions
@@ -695,20 +695,30 @@
             // Render featured photos
             const featuredPhotosContainer = document.getElementById('featured-photos');
             if (featuredPhotosContainer) {
-                featuredPhotosContainer.innerHTML = featuredPhotos.map(photo => `
-                    <div
-                        onclick="openModal(${JSON.stringify(photo).replace(/"/g, '&quot;')}, 'image')"
-                        class="image-container relative group cursor-pointer overflow-hidden rounded-lg shadow-lg transform hover:scale-105 transition-all duration-300 h-64 bg-gray-200 hover-lift"
-                    >
-                        <img src="${photo.url}" alt="${photo.title}" class="w-full h-full object-cover loading-pulse" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'w-full h-full flex items-center justify-center bg-gradient-to-br from-red-400 to-orange-500 text-white font-bold\'>Image Loading</div>'">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
-                            <div class="text-white">
-                                <h3 class="font-bold">${photo.title}</h3>
-                                <p class="text-sm capitalize">${photo.category}</p>
+                featuredPhotosContainer.innerHTML = featuredPhotos.map(photo => {
+                    // Determine aspect ratio class based on the aspect property
+                    let aspectClass = 'aspect-square'; // default
+                    if (photo.aspect === 'portrait') {
+                        aspectClass = 'aspect-[3/4]';
+                    } else if (photo.aspect === 'landscape') {
+                        aspectClass = 'aspect-[4/3]';
+                    }
+                    
+                    return `
+                        <div
+                            onclick="openModal(${JSON.stringify(photo).replace(/"/g, '&quot;')}, 'image')"
+                            class="image-container relative group cursor-pointer overflow-hidden rounded-lg shadow-lg transform hover:scale-105 transition-all duration-300 ${aspectClass} bg-gray-200 hover-lift"
+                        >
+                            <img src="${photo.url}" alt="${photo.title}" class="w-full h-full object-cover loading-pulse" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'w-full h-full flex items-center justify-center bg-gradient-to-br from-red-400 to-orange-500 text-white font-bold\'>Image Loading</div>'">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                                <div class="text-white">
+                                    <h3 class="font-bold">${photo.title}</h3>
+                                    <p class="text-sm capitalize">${photo.category}</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                `).join('');
+                    `;
+                }).join('');
             }
             
             // Render featured videos
@@ -863,20 +873,30 @@
             // Render photo gallery
             const galleryContainer = document.getElementById('photo-gallery');
             if (galleryContainer) {
-                galleryContainer.innerHTML = displayPhotos.map(photo => `
-                    <div
-                        onclick="openModal(${JSON.stringify(photo).replace(/"/g, '&quot;')}, 'image')"
-                        class="image-container relative group cursor-pointer overflow-hidden rounded-lg shadow-lg transform hover:scale-105 transition-all duration-300 h-64 bg-gray-200 hover-lift"
-                    >
-                        <img src="${photo.url}" alt="${photo.title}" class="w-full h-full object-cover loading-pulse" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'w-full h-full flex items-center justify-center bg-gradient-to-br from-red-400 to-orange-500 text-white font-bold\'>Image Loading</div>'">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
-                            <div class="text-white">
-                                <h3 class="font-bold">${photo.title}</h3>
-                                <p class="text-sm capitalize">${photo.category}</p>
+                galleryContainer.innerHTML = displayPhotos.map(photo => {
+                    // Determine aspect ratio class based on the aspect property
+                    let aspectClass = 'aspect-square'; // default
+                    if (photo.aspect === 'portrait') {
+                        aspectClass = 'aspect-[3/4]';
+                    } else if (photo.aspect === 'landscape') {
+                        aspectClass = 'aspect-[4/3]';
+                    }
+                    
+                    return `
+                        <div
+                            onclick="openModal(${JSON.stringify(photo).replace(/"/g, '&quot;')}, 'image')"
+                            class="image-container relative group cursor-pointer overflow-hidden rounded-lg shadow-lg transform hover:scale-105 transition-all duration-300 ${aspectClass} bg-gray-200 hover-lift"
+                        >
+                            <img src="${photo.url}" alt="${photo.title}" class="w-full h-full object-cover loading-pulse" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'w-full h-full flex items-center justify-center bg-gradient-to-br from-red-400 to-orange-500 text-white font-bold\'>Image Loading</div>'">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                                <div class="text-white">
+                                    <h3 class="font-bold">${photo.title}</h3>
+                                    <p class="text-sm capitalize">${photo.category}</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                `).join('');
+                    `;
+                }).join('');
             }
             
             // Render pagination
@@ -992,16 +1012,26 @@
         function initTeamPage() {
             const teamContainer = document.getElementById('team-members');
             if (teamContainer) {
-                teamContainer.innerHTML = teamMembers.map(member => `
-                    <div class="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all hover-lift">
-                        <div class="h-64 team-image bg-gradient-to-br from-red-400 to-orange-500 loading-pulse" style="background-image: url('${member.image}')"></div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-bold mb-2">${member.name}</h3>
-                            <p class="text-red-500 font-semibold mb-3">${member.position}</p>
-                            <p class="text-gray-600 text-sm text-justify">${member.bio}</p>
+                teamContainer.innerHTML = teamMembers.map(member => {
+                    // Determine aspect ratio class based on the aspect property
+                    let aspectClass = 'aspect-square'; // default
+                    if (member.aspect === 'portrait') {
+                        aspectClass = 'aspect-[3/4]';
+                    } else if (member.aspect === 'landscape') {
+                        aspectClass = 'aspect-[4/3]';
+                    }
+                    
+                    return `
+                        <div class="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all hover-lift">
+                            <div class="${aspectClass} team-image bg-gradient-to-br from-red-400 to-orange-500 loading-pulse" style="background-image: url('${member.image}')"></div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold mb-2">${member.name}</h3>
+                                <p class="text-red-500 font-semibold mb-3">${member.position}</p>
+                                <p class="text-gray-600 text-sm text-justify">${member.bio}</p>
+                            </div>
                         </div>
-                    </div>
-                `).join('');
+                    `;
+                }).join('');
             }
         }
 
