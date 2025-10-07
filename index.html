@@ -122,7 +122,8 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
                 <div class="flex items-center gap-3 cursor-pointer" onclick="showPage('home')">
-                    <img src="images/logo.png" alt="MWAFFS MEDIA Logo" class="h-8 w-auto" onerror="this.style.display='none'">
+                    <!-- Updated logo to use ImageKit.io -->
+                    <img src="https://ik.imagekit.io/your_imagekit_id/logo.png" alt="MWAFFS MEDIA Logo" class="h-8 w-auto" onerror="this.style.display='none'">
                     <span class="text-white text-2xl font-bold">MWAFFS MEDIA</span>
                 </div>
                 
@@ -167,7 +168,8 @@
 
     <!-- Hero Section -->
     <section id="home-section" class="section-visible">
-        <div class="relative h-screen flex items-center justify-center text-white text-center px-4 parallax" style="background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('images/hero-bg.jpg');">
+        <!-- Updated hero background to use ImageKit.io -->
+        <div class="relative h-screen flex items-center justify-center text-white text-center px-4 parallax" style="background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://ik.imagekit.io/your_imagekit_id/hero-bg.jpg');">
             <div class="relative z-10 max-w-4xl mx-auto">
                 <h1 class="text-5xl md:text-7xl font-bold mb-6 text-balance">MWAFFS MEDIA</h1>
                 <p class="text-2xl md:text-3xl mb-4 text-red-400 text-balance">Capturing Malawi's Stories Through Creative Excellence</p>
@@ -593,7 +595,10 @@
         let scrolled = false;
         let statsAnimated = false;
 
-        // Data - FIXED: Corrected duplicate IDs and file extensions
+        // ImageKit.io Configuration - Update this with your actual ImageKit ID
+        const IMAGEKIT_BASE_URL = "https://ik.imagekit.io/your_imagekit_id";
+
+        // Data - Updated to use ImageKit.io URLs
         const youtubeVideos = [
             { id: 'nZ5DNJTSoFs', title: 'Business Tips - Podcast Ep1', category: 'Mwaffs Media - Podcast' },
             { id: '9V1HfbEH1I4', title: 'Business Tips - Podcast Ep2', category: 'Mwaffs Media - Podcast' },
@@ -606,28 +611,28 @@
             { id: 'Kg3zVcGCq8I', title: 'Special Ep with Bunda BSC', category: 'Mwaffs Media - Podcast' },
         ];
 
-        // Generate photo data - FIXED: Corrected duplicate IDs and file extensions
+        // Generate photo data - Updated to use ImageKit.io URLs
         const photos = [
-            { id: 1, url: 'images/d1.jpg', title: 'Day Pictures', category: 'Day Pictures' },
-            { id: 2, url: 'images/d2.jpg', title: 'Day Pictures', category: 'Day Pictures' },
-            { id: 3, url: 'images/np1.jpg', title: 'Night Pictures', category: 'Night Pictures' },
-            { id: 4, url: 'images/np2.jpg', title: 'Night Pictures', category: 'Night Pictures' },
-            { id: 5, url: 'images/np3.jpg', title: 'Night Pictures', category: 'Night Pictures' },
-            { id: 6, url: 'images/Praise.jpg', title: 'Team Member', category: 'Portrait' }
+            { id: 1, url: `${IMAGEKIT_BASE_URL}/d1.jpg`, title: 'Day Pictures', category: 'Day Pictures' },
+            { id: 2, url: `${IMAGEKIT_BASE_URL}/d2.jpg`, title: 'Day Pictures', category: 'Day Pictures' },
+            { id: 3, url: `${IMAGEKIT_BASE_URL}/np1.jpg`, title: 'Night Pictures', category: 'Night Pictures' },
+            { id: 4, url: `${IMAGEKIT_BASE_URL}/np2.jpg`, title: 'Night Pictures', category: 'Night Pictures' },
+            { id: 5, url: `${IMAGEKIT_BASE_URL}/np3.jpg`, title: 'Night Pictures', category: 'Night Pictures' },
+            { id: 6, url: `${IMAGEKIT_BASE_URL}/Praise.jpg`, title: 'Team Member', category: 'Portrait' }
         ];
 
         const photosPerPage = 12;
         const videosPerPage = 6;
 
-        // Team members data
+        // Team members data - Updated to use ImageKit.io URLs
         const teamMembers = [
-            { name: 'Precious Mataka', position: 'CEO', bio: 'Co-Founder leading with creativity, vision, and innovation.', image: 'images/Precious.png' },
-            { name: 'Praise Bwanali', position: 'CEO', bio: 'Creative director with extensive photography experience.', image: 'images/Praise.jpg' },
-            { name: 'Grant Mliule', position: 'Managing Director', bio: 'Strategic leader overseeing operations.', image: 'images/Grant.jpg' },
-            { name: 'Fatsani Munkhondya', position: 'Secretary', bio: 'Ensures effective communication and organization.', image: 'images/Fatsani.jpeg' },
-            { name: 'Charles Luwe', position: 'Marketing Director', bio: 'Leads creative marketing strategies.', image: 'images/mwaffs.png' },
-            { name: 'Alexander Makuluni', position: 'Deputy Marketing Director', bio: 'Supports marketing with fresh ideas.', image: 'images/Alexander.jpg' },
-            { name: 'Watson S. Banda', position: 'Chief Whipper', bio: 'Energizes and motivates the team.', image: 'images/Watson.jpeg' }
+            { name: 'Precious Mataka', position: 'CEO', bio: 'Co-Founder leading with creativity, vision, and innovation.', image: `${IMAGEKIT_BASE_URL}/Precious.png` },
+            { name: 'Praise Bwanali', position: 'CEO', bio: 'Creative director with extensive photography experience.', image: `${IMAGEKIT_BASE_URL}/Praise.jpg` },
+            { name: 'Grant Mliule', position: 'Managing Director', bio: 'Strategic leader overseeing operations.', image: `${IMAGEKIT_BASE_URL}/Grant.jpg` },
+            { name: 'Fatsani Munkhondya', position: 'Secretary', bio: 'Ensures effective communication and organization.', image: `${IMAGEKIT_BASE_URL}/Fatsani.jpeg` },
+            { name: 'Charles Luwe', position: 'Marketing Director', bio: 'Leads creative marketing strategies.', image: `${IMAGEKIT_BASE_URL}/mwaffs.png` },
+            { name: 'Alexander Makuluni', position: 'Deputy Marketing Director', bio: 'Supports marketing with fresh ideas.', image: `${IMAGEKIT_BASE_URL}/Alexander.jpg` },
+            { name: 'Watson S. Banda', position: 'Chief Whipper', bio: 'Energizes and motivates the team.', image: `${IMAGEKIT_BASE_URL}/Watson.jpeg` }
         ];
 
         // Testimonials data
@@ -640,12 +645,12 @@
             { name: 'James Nthala', role: 'Real Estate Developer', text: 'Their architectural photography showcases our properties in the best light possible. Professional and reliable service every time.' }
         ];
 
-        // Featured photos for homepage
+        // Featured photos for homepage - Updated to use ImageKit.io URLs
         const featuredPhotos = [
-            { id: 1, url: 'images/d1.png', title: 'A Girl in a Day Light Photo', category: 'Day light Pictures' },
-            { id: 2, url: 'images/d2.png', title: 'A young-man in a Day Light Photo', category: 'Day light Pictures' },
-            { id: 3, url: 'images/np1.png', title: 'A Girl in a Night Photo', category: 'Night Pictures' },
-            { id: 4, url: 'images/np2.png', title: 'A Girl in a Night Photo', category: 'Night Pictures' }
+            { id: 1, url: `${IMAGEKIT_BASE_URL}/d1.png`, title: 'A Girl in a Day Light Photo', category: 'Day light Pictures' },
+            { id: 2, url: `${IMAGEKIT_BASE_URL}/d2.png`, title: 'A young-man in a Day Light Photo', category: 'Day light Pictures' },
+            { id: 3, url: `${IMAGEKIT_BASE_URL}/np1.png`, title: 'A Girl in a Night Photo', category: 'Night Pictures' },
+            { id: 4, url: `${IMAGEKIT_BASE_URL}/np2.png`, title: 'A Girl in a Night Photo', category: 'Night Pictures' }
         ];
 
         // DOM manipulation functions
