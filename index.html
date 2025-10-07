@@ -7,7 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Custom styles to mimic the React component */
+        /* Custom styles */
         .section-hidden {
             display: none;
         }
@@ -40,7 +40,16 @@
             animation-play-state: paused;
         }
         
-        /* Image styling fixes */
+        /* Improved text alignment and spacing */
+        .text-justify {
+            text-align: justify;
+            text-justify: inter-word;
+        }
+        .text-balance {
+            text-wrap: balance;
+        }
+        
+        /* Enhanced image styling */
         .image-container {
             position: relative;
             overflow: hidden;
@@ -55,6 +64,55 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
+        }
+        
+        /* Animation for statistics */
+        @keyframes countUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .count-animate {
+            animation: countUp 1.5s ease-out forwards;
+        }
+        
+        /* Parallax effect for hero section */
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        /* Loading animation */
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .loading-pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Enhanced hover effects */
+        .hover-lift {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .hover-lift:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        /* Gradient text effect */
+        .gradient-text {
+            background: linear-gradient(90deg, #ef4444, #f97316);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
     </style>
 </head>
@@ -93,22 +151,40 @@
         </div>
     </nav>
 
+    <!-- Scroll to top button -->
+    <button id="scroll-top" class="fixed bottom-8 right-8 z-40 w-12 h-12 bg-red-500 text-white rounded-full shadow-lg flex items-center justify-center transition-all duration-300 opacity-0 transform translate-y-10 hover:bg-red-600 hover:scale-110">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Loading overlay -->
+    <div id="loading-overlay" class="fixed inset-0 bg-gray-900 z-50 flex flex-col items-center justify-center transition-opacity duration-500">
+        <div class="text-center">
+            <div class="w-20 h-20 border-4 border-red-500 border-t-transparent rounded-full animate-spin mx-auto mb-6"></div>
+            <h2 class="text-3xl font-bold text-white mb-2">MWAFFS MEDIA</h2>
+            <p class="text-gray-300">Loading your creative experience...</p>
+        </div>
+    </div>
+
     <!-- Hero Section -->
     <section id="home-section" class="section-visible">
-        <div class="relative h-screen flex items-center justify-center text-white text-center px-4 bg-gradient-to-br from-gray-900 via-red-900 to-gray-900">
-            <div class="absolute inset-0 bg-black/40"></div>
+        <div class="relative h-screen flex items-center justify-center text-white text-center px-4 parallax" style="background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('images/hero-bg.jpg');">
             <div class="relative z-10 max-w-4xl mx-auto">
-                <h1 class="text-5xl md:text-7xl font-bold mb-6">MWAFFS MEDIA</h1>
-                <p class="text-2xl md:text-3xl mb-4 text-red-400">Capturing Malawi's Stories Through Creative Excellence</p>
-                <p class="text-xl md:text-2xl mb-8">Professional Photography • Videography • Graphic Design</p>
+                <h1 class="text-5xl md:text-7xl font-bold mb-6 text-balance">MWAFFS MEDIA</h1>
+                <p class="text-2xl md:text-3xl mb-4 text-red-400 text-balance">Capturing Malawi's Stories Through Creative Excellence</p>
+                <p class="text-xl md:text-2xl mb-8 text-balance">Professional Photography • Videography • Graphic Design</p>
                 <div class="flex gap-4 justify-center flex-wrap">
-                    <button onclick="showPage('photography')" class="bg-red-500 hover:bg-red-600 text-white px-8 py-3 rounded-full flex items-center gap-2 transition-all transform hover:scale-105">
+                    <button onclick="showPage('photography')" class="bg-red-500 hover:bg-red-600 text-white px-8 py-3 rounded-full flex items-center gap-2 transition-all transform hover:scale-105 hover-lift">
                         <i class="fas fa-camera"></i> View Photography
                     </button>
-                    <button onclick="showPage('videography')" class="bg-transparent border-2 border-white hover:bg-white hover:text-gray-900 text-white px-8 py-3 rounded-full flex items-center gap-2 transition-all transform hover:scale-105">
+                    <button onclick="showPage('videography')" class="bg-transparent border-2 border-white hover:bg-white hover:text-gray-900 text-white px-8 py-3 rounded-full flex items-center gap-2 transition-all transform hover:scale-105 hover-lift">
                         <i class="fas fa-video"></i> View Videography
                     </button>
                 </div>
+            </div>
+            
+            <!-- Scroll indicator -->
+            <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+                <i class="fas fa-chevron-down text-white text-2xl"></i>
             </div>
         </div>
 
@@ -116,36 +192,36 @@
         <div class="py-20 bg-gray-50">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-16">
-                    <h2 class="text-4xl md:text-5xl font-bold mb-4">About MWAFFS MEDIA</h2>
-                    <p class="text-xl text-gray-600">Pioneering creative excellence in Malawi's media landscape</p>
+                    <h2 class="text-4xl md:text-5xl font-bold mb-4 text-balance">About MWAFFS MEDIA</h2>
+                    <p class="text-xl text-gray-600 text-balance">Pioneering creative excellence in Malawi's media landscape</p>
                 </div>
 
                 <div class="grid md:grid-cols-2 gap-12 items-center mb-16">
                     <div>
-                        <h3 class="text-3xl font-bold mb-4 text-red-500">Our Story</h3>
-                        <p class="text-lg text-gray-700 mb-4">
+                        <h3 class="text-3xl font-bold mb-4 gradient-text">Our Story</h3>
+                        <p class="text-lg text-gray-700 mb-4 text-justify">
                             MWAFFS MEDIA stands at the forefront of Malawi's creative industry, delivering exceptional photography, videography, and graphic design services. Founded with a vision to tell Malawi's stories through powerful visual narratives.
                         </p>
-                        <p class="text-lg text-gray-700">
+                        <p class="text-lg text-gray-700 text-justify">
                             Our team combines technical expertise with artistic creativity, capturing moments that matter with professional precision and cultural sensitivity.
                         </p>
                     </div>
 
                     <div class="grid grid-cols-2 gap-6">
-                        <div class="bg-white p-6 rounded-lg shadow-lg text-center transform hover:scale-105 transition-transform">
-                            <div class="text-4xl font-bold text-red-500 mb-2">500+</div>
+                        <div class="bg-white p-6 rounded-lg shadow-lg text-center transform hover:scale-105 transition-all hover-lift">
+                            <div id="stat-projects" class="text-4xl font-bold text-red-500 mb-2 count-animate" data-count="500">0</div>
                             <div class="text-gray-600">Projects</div>
                         </div>
-                        <div class="bg-white p-6 rounded-lg shadow-lg text-center transform hover:scale-105 transition-transform">
-                            <div class="text-4xl font-bold text-red-500 mb-2">8</div>
+                        <div class="bg-white p-6 rounded-lg shadow-lg text-center transform hover:scale-105 transition-all hover-lift">
+                            <div id="stat-years" class="text-4xl font-bold text-red-500 mb-2 count-animate" data-count="8">0</div>
                             <div class="text-gray-600">Years</div>
                         </div>
-                        <div class="bg-white p-6 rounded-lg shadow-lg text-center transform hover:scale-105 transition-transform">
-                            <div class="text-4xl font-bold text-red-500 mb-2">200+</div>
+                        <div class="bg-white p-6 rounded-lg shadow-lg text-center transform hover:scale-105 transition-all hover-lift">
+                            <div id="stat-clients" class="text-4xl font-bold text-red-500 mb-2 count-animate" data-count="200">0</div>
                             <div class="text-gray-600">Clients</div>
                         </div>
-                        <div class="bg-white p-6 rounded-lg shadow-lg text-center transform hover:scale-105 transition-transform">
-                            <div class="text-4xl font-bold text-red-500 mb-2">50+</div>
+                        <div class="bg-white p-6 rounded-lg shadow-lg text-center transform hover:scale-105 transition-all hover-lift">
+                            <div id="stat-awards" class="text-4xl font-bold text-red-500 mb-2 count-animate" data-count="50">0</div>
                             <div class="text-gray-600">Awards</div>
                         </div>
                     </div>
@@ -157,15 +233,15 @@
         <div class="py-20 bg-white">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-16">
-                    <h2 class="text-4xl md:text-5xl font-bold mb-4">Our Featured Work</h2>
-                    <p class="text-xl text-gray-600">A glimpse of our creative portfolio</p>
+                    <h2 class="text-4xl md:text-5xl font-bold mb-4 text-balance">Our Featured Work</h2>
+                    <p class="text-xl text-gray-600 text-balance">A glimpse of our creative portfolio</p>
                 </div>
 
                 <!-- Featured Photography -->
                 <div class="mb-20">
                     <div class="flex justify-between items-center mb-8">
                         <h3 class="text-3xl font-bold text-gray-800">Photography</h3>
-                        <button onclick="showPage('photography')" class="text-red-500 hover:text-red-600 font-semibold flex items-center gap-2">
+                        <button onclick="showPage('photography')" class="text-red-500 hover:text-red-600 font-semibold flex items-center gap-2 hover-lift">
                             See More <i class="fas fa-arrow-right"></i>
                         </button>
                     </div>
@@ -178,7 +254,7 @@
                 <div>
                     <div class="flex justify-between items-center mb-8">
                         <h3 class="text-3xl font-bold text-gray-800">Videography</h3>
-                        <button onclick="showPage('videography')" class="text-red-500 hover:text-red-600 font-semibold flex items-center gap-2">
+                        <button onclick="showPage('videography')" class="text-red-500 hover:text-red-600 font-semibold flex items-center gap-2 hover-lift">
                             See More <i class="fas fa-arrow-right"></i>
                         </button>
                     </div>
@@ -193,8 +269,8 @@
         <div class="py-20 bg-gray-100">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-16">
-                    <h2 class="text-4xl md:text-5xl font-bold mb-4">What Our Clients Say</h2>
-                    <p class="text-xl text-gray-600">Hear from our satisfied customers</p>
+                    <h2 class="text-4xl md:text-5xl font-bold mb-4 text-balance">What Our Clients Say</h2>
+                    <p class="text-xl text-gray-600 text-balance">Hear from our satisfied customers</p>
                 </div>
 
                 <div class="testimonial-container overflow-hidden relative">
@@ -209,8 +285,8 @@
         <div class="py-20 bg-gray-900 text-white">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-16">
-                    <h2 class="text-4xl md:text-5xl font-bold mb-4">Get In Touch</h2>
-                    <p class="text-xl text-gray-400">Ready to bring your vision to life? Contact us today!</p>
+                    <h2 class="text-4xl md:text-5xl font-bold mb-4 text-balance">Get In Touch</h2>
+                    <p class="text-xl text-gray-400 text-balance">Ready to bring your vision to life? Contact us today!</p>
                 </div>
 
                 <div class="grid md:grid-cols-2 gap-12">
@@ -221,7 +297,7 @@
                             <i class="fas fa-map-marker-alt text-red-500 text-xl mt-1"></i>
                             <div>
                                 <h4 class="font-bold mb-1">Office Address</h4>
-                                <p class="text-gray-400">Blantyre, Southern Region<br>Malawi</p>
+                                <p class="text-gray-400 text-justify">Blantyre, Southern Region<br>Malawi</p>
                             </div>
                         </div>
 
@@ -244,23 +320,23 @@
                         <div>
                             <h4 class="font-bold mb-4">Follow Us</h4>
                             <div class="flex gap-4">
-                                <a href="#" class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors transform hover:scale-110" title="Facebook">
+                                <a href="#" class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors transform hover:scale-110 hover-lift" title="Facebook">
                                     <i class="fab fa-facebook-f"></i>
                                 </a>
-                                <a href="#" class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors transform hover:scale-110" title="YouTube">
+                                <a href="#" class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors transform hover:scale-110 hover-lift" title="YouTube">
                                     <i class="fab fa-youtube"></i>
                                 </a>
-                                <a href="#" class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors transform hover:scale-110" title="Instagram">
+                                <a href="#" class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors transform hover:scale-110 hover-lift" title="Instagram">
                                     <i class="fab fa-instagram"></i>
                                 </a>
-                                <a href="#" class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors transform hover:scale-110" title="Twitter">
+                                <a href="#" class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors transform hover:scale-110 hover-lift" title="Twitter">
                                     <i class="fab fa-twitter"></i>
                                 </a>
                             </div>
                         </div>
                     </div>
 
-                    <div class="bg-gray-800 p-8 rounded-lg">
+                    <div class="bg-gray-800 p-8 rounded-lg hover-lift">
                         <h3 class="text-2xl font-bold mb-6">Send us a Message</h3>
                         <div class="space-y-4">
                             <div>
@@ -288,7 +364,7 @@
                                 <textarea rows="4" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 focus:border-red-500 focus:outline-none text-white" placeholder="Tell us about your project..."></textarea>
                             </div>
 
-                            <button class="w-full bg-red-500 hover:bg-red-600 text-white px-8 py-3 rounded-full font-bold transition-colors">
+                            <button class="w-full bg-red-500 hover:bg-red-600 text-white px-8 py-3 rounded-full font-bold transition-colors hover-lift">
                                 Send Message
                             </button>
                         </div>
@@ -302,35 +378,35 @@
     <section id="about-section" class="section-hidden py-20 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold mb-4">About MWAFFS MEDIA</h2>
-                <p class="text-xl text-gray-600">Pioneering creative excellence in Malawi's media landscape</p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 text-balance">About MWAFFS MEDIA</h2>
+                <p class="text-xl text-gray-600 text-balance">Pioneering creative excellence in Malawi's media landscape</p>
             </div>
 
             <div class="grid md:grid-cols-2 gap-12 items-center mb-16">
                 <div>
-                    <h3 class="text-3xl font-bold mb-4 text-red-500">Our Story</h3>
-                    <p class="text-lg text-gray-700 mb-4">
+                    <h3 class="text-3xl font-bold mb-4 gradient-text">Our Story</h3>
+                    <p class="text-lg text-gray-700 mb-4 text-justify">
                         MWAFFS MEDIA stands at the forefront of Malawi's creative industry, delivering exceptional photography, videography, and graphic design services. Founded with a vision to tell Malawi's stories through powerful visual narratives.
                     </p>
-                    <p class="text-lg text-gray-700">
+                    <p class="text-lg text-gray-700 text-justify">
                         Our team combines technical expertise with artistic creativity, capturing moments that matter with professional precision and cultural sensitivity.
                     </p>
                 </div>
 
                 <div class="grid grid-cols-2 gap-6">
-                    <div class="bg-white p-6 rounded-lg shadow-lg text-center transform hover:scale-105 transition-transform">
+                    <div class="bg-white p-6 rounded-lg shadow-lg text-center transform hover:scale-105 transition-all hover-lift">
                         <div class="text-4xl font-bold text-red-500 mb-2">500+</div>
                         <div class="text-gray-600">Projects</div>
                     </div>
-                    <div class="bg-white p-6 rounded-lg shadow-lg text-center transform hover:scale-105 transition-transform">
+                    <div class="bg-white p-6 rounded-lg shadow-lg text-center transform hover:scale-105 transition-all hover-lift">
                         <div class="text-4xl font-bold text-red-500 mb-2">8</div>
                         <div class="text-gray-600">Years</div>
                     </div>
-                    <div class="bg-white p-6 rounded-lg shadow-lg text-center transform hover:scale-105 transition-transform">
+                    <div class="bg-white p-6 rounded-lg shadow-lg text-center transform hover:scale-105 transition-all hover-lift">
                         <div class="text-4xl font-bold text-red-500 mb-2">200+</div>
                         <div class="text-gray-600">Clients</div>
                     </div>
-                    <div class="bg-white p-6 rounded-lg shadow-lg text-center transform hover:scale-105 transition-transform">
+                    <div class="bg-white p-6 rounded-lg shadow-lg text-center transform hover:scale-105 transition-all hover-lift">
                         <div class="text-4xl font-bold text-red-500 mb-2">50+</div>
                         <div class="text-gray-600">Awards</div>
                     </div>
@@ -343,8 +419,8 @@
     <section id="photography-section" class="section-hidden py-20 min-h-screen bg-gray-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
-                <h2 class="text-4xl md:text-5xl font-bold mb-4">Photography Portfolio</h2>
-                <p class="text-xl text-gray-600">Browse our collection of stunning photographs</p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 text-balance">Photography Portfolio</h2>
+                <p class="text-xl text-gray-600 text-balance">Browse our collection of stunning photographs</p>
             </div>
 
             <div class="flex gap-3 justify-center mb-8 flex-wrap" id="photo-categories">
@@ -365,8 +441,8 @@
     <section id="videography-section" class="section-hidden py-20 min-h-screen bg-gray-900 text-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
-                <h2 class="text-4xl md:text-5xl font-bold mb-4">Videography Portfolio</h2>
-                <p class="text-xl text-gray-400">Watch our latest video productions from Mwaffs Media</p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 text-balance">Videography Portfolio</h2>
+                <p class="text-xl text-gray-400 text-balance">Watch our latest video productions from Mwaffs Media</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8" id="video-gallery">
@@ -383,8 +459,8 @@
     <section id="team-section" class="section-hidden py-20 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold mb-4">Our Team</h2>
-                <p class="text-xl text-gray-600">Meet the creative minds behind MWAFFS MEDIA</p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 text-balance">Our Team</h2>
+                <p class="text-xl text-gray-600 text-balance">Meet the creative minds behind MWAFFS MEDIA</p>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8" id="team-members">
@@ -397,8 +473,8 @@
     <section id="contact-section" class="section-hidden py-20 bg-gray-900 text-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold mb-4">Get In Touch</h2>
-                <p class="text-xl text-gray-400">Ready to bring your vision to life?</p>
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 text-balance">Get In Touch</h2>
+                <p class="text-xl text-gray-400 text-balance">Ready to bring your vision to life?</p>
             </div>
 
             <div class="grid md:grid-cols-2 gap-12">
@@ -409,7 +485,7 @@
                         <i class="fas fa-map-marker-alt text-red-500 text-xl mt-1"></i>
                         <div>
                             <h4 class="font-bold mb-1">Office Address</h4>
-                            <p class="text-gray-400">Blantyre, Southern Region<br>Malawi</p>
+                            <p class="text-gray-400 text-justify">Blantyre, Southern Region<br>Malawi</p>
                         </div>
                     </div>
 
@@ -432,23 +508,23 @@
                     <div>
                         <h4 class="font-bold mb-4">Follow Us</h4>
                         <div class="flex gap-4">
-                            <a href="#" class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors transform hover:scale-110" title="Facebook">
+                            <a href="#" class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors transform hover:scale-110 hover-lift" title="Facebook">
                                 <i class="fab fa-facebook-f"></i>
                             </a>
-                            <a href="#" class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors transform hover:scale-110" title="YouTube">
+                            <a href="#" class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors transform hover:scale-110 hover-lift" title="YouTube">
                                 <i class="fab fa-youtube"></i>
                             </a>
-                            <a href="#" class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors transform hover:scale-110" title="Instagram">
+                            <a href="#" class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors transform hover:scale-110 hover-lift" title="Instagram">
                                 <i class="fab fa-instagram"></i>
                             </a>
-                            <a href="#" class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors transform hover:scale-110" title="Twitter">
+                            <a href="#" class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors transform hover:scale-110 hover-lift" title="Twitter">
                                 <i class="fab fa-twitter"></i>
                             </a>
                         </div>
                     </div>
                 </div>
 
-                <div class="bg-gray-800 p-8 rounded-lg">
+                <div class="bg-gray-800 p-8 rounded-lg hover-lift">
                     <h3 class="text-2xl font-bold mb-6">Send us a Message</h3>
                     <div class="space-y-4">
                         <div>
@@ -476,7 +552,7 @@
                             <textarea rows="4" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 focus:border-red-500 focus:outline-none text-white" placeholder="Tell us about your project..."></textarea>
                         </div>
 
-                        <button class="w-full bg-red-500 hover:bg-red-600 text-white px-8 py-3 rounded-full font-bold transition-colors">
+                        <button class="w-full bg-red-500 hover:bg-red-600 text-white px-8 py-3 rounded-full font-bold transition-colors hover-lift">
                             Send Message
                         </button>
                     </div>
@@ -487,7 +563,7 @@
 
     <!-- Media Modal -->
     <div id="media-modal" class="fixed inset-0 bg-black/95 z-50 items-center justify-center p-4 modal-hidden" onclick="closeModal()">
-        <button onclick="closeModal()" class="absolute top-4 right-4 text-white hover:text-red-500 z-10">
+        <button onclick="closeModal()" class="absolute top-4 right-4 text-white hover:text-red-500 z-10 hover-lift">
             <i class="fas fa-times text-2xl"></i>
         </button>
         <div class="max-w-6xl max-h-[90vh]" onclick="event.stopPropagation()">
@@ -515,6 +591,7 @@
         let currentPhotoPage = 0;
         let currentVideoPage = 0;
         let scrolled = false;
+        let statsAnimated = false;
 
         // Data - FIXED: Corrected duplicate IDs and file extensions
         const youtubeVideos = [
@@ -621,9 +698,9 @@
                 featuredPhotosContainer.innerHTML = featuredPhotos.map(photo => `
                     <div
                         onclick="openModal(${JSON.stringify(photo).replace(/"/g, '&quot;')}, 'image')"
-                        class="image-container relative group cursor-pointer overflow-hidden rounded-lg shadow-lg transform hover:scale-105 transition-all duration-300 h-64 bg-gray-200"
+                        class="image-container relative group cursor-pointer overflow-hidden rounded-lg shadow-lg transform hover:scale-105 transition-all duration-300 h-64 bg-gray-200 hover-lift"
                     >
-                        <img src="${photo.url}" alt="${photo.title}" class="w-full h-full object-cover" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'w-full h-full flex items-center justify-center bg-gradient-to-br from-red-400 to-orange-500 text-white font-bold\'>Image Loading</div>'">
+                        <img src="${photo.url}" alt="${photo.title}" class="w-full h-full object-cover loading-pulse" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'w-full h-full flex items-center justify-center bg-gradient-to-br from-red-400 to-orange-500 text-white font-bold\'>Image Loading</div>'">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
                             <div class="text-white">
                                 <h3 class="font-bold">${photo.title}</h3>
@@ -640,7 +717,7 @@
                 const featuredVideos = youtubeVideos.slice(0, 3); // Get first 3 videos
                 
                 featuredVideosContainer.innerHTML = featuredVideos.map(video => `
-                    <div class="bg-gray-800 rounded-lg overflow-hidden shadow-xl transform hover:scale-105 transition-all">
+                    <div class="bg-gray-800 rounded-lg overflow-hidden shadow-xl transform hover:scale-105 transition-all hover-lift">
                         <div class="aspect-video">
                             <iframe
                                 src="https://www.youtube.com/embed/${video.id}"
@@ -665,7 +742,7 @@
                 const duplicatedTestimonials = [...testimonials, ...testimonials];
                 
                 testimonialsContainer.innerHTML = duplicatedTestimonials.map(testimonial => `
-                    <div class="min-w-[350px] bg-white p-6 rounded-lg shadow-lg">
+                    <div class="min-w-[350px] bg-white p-6 rounded-lg shadow-lg hover-lift">
                         <div class="flex items-center mb-4">
                             <div class="w-12 h-12 rounded-full bg-red-500 flex items-center justify-center text-white font-bold">
                                 ${testimonial.name.charAt(0)}
@@ -675,7 +752,7 @@
                                 <p class="text-sm text-gray-600">${testimonial.role}</p>
                             </div>
                         </div>
-                        <p class="text-gray-700 italic">"${testimonial.text}"</p>
+                        <p class="text-gray-700 italic text-justify">"${testimonial.text}"</p>
                         <div class="flex text-yellow-400 mt-4">
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
@@ -686,6 +763,38 @@
                     </div>
                 `).join('');
             }
+            
+            // Animate statistics if not already animated
+            if (!statsAnimated) {
+                animateStatistics();
+                statsAnimated = true;
+            }
+        }
+
+        // Animate statistics counting up
+        function animateStatistics() {
+            const statElements = [
+                { id: 'stat-projects', target: 500 },
+                { id: 'stat-years', target: 8 },
+                { id: 'stat-clients', target: 200 },
+                { id: 'stat-awards', target: 50 }
+            ];
+            
+            statElements.forEach(stat => {
+                const element = document.getElementById(stat.id);
+                if (!element) return;
+                
+                let current = 0;
+                const increment = stat.target / 50; // 50 steps for smooth animation
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= stat.target) {
+                        current = stat.target;
+                        clearInterval(timer);
+                    }
+                    element.textContent = Math.floor(current) + (stat.id === 'stat-years' ? '' : '+');
+                }, 30);
+            });
         }
 
         function toggleMobileMenu() {
@@ -709,7 +818,7 @@
                 categoriesContainer.innerHTML = categories.map(cat => `
                     <button 
                         onclick="setPhotoCategory('${cat}')" 
-                        class="px-6 py-2 rounded-full capitalize transition-all ${currentCategory === cat ? 'bg-red-500 text-white' : 'bg-white text-gray-700 hover:bg-red-100'}"
+                        class="px-6 py-2 rounded-full capitalize transition-all ${currentCategory === cat ? 'bg-red-500 text-white' : 'bg-white text-gray-700 hover:bg-red-100'} hover-lift"
                     >
                         ${cat}
                     </button>
@@ -757,9 +866,9 @@
                 galleryContainer.innerHTML = displayPhotos.map(photo => `
                     <div
                         onclick="openModal(${JSON.stringify(photo).replace(/"/g, '&quot;')}, 'image')"
-                        class="image-container relative group cursor-pointer overflow-hidden rounded-lg shadow-lg transform hover:scale-105 transition-all duration-300 h-64 bg-gray-200"
+                        class="image-container relative group cursor-pointer overflow-hidden rounded-lg shadow-lg transform hover:scale-105 transition-all duration-300 h-64 bg-gray-200 hover-lift"
                     >
-                        <img src="${photo.url}" alt="${photo.title}" class="w-full h-full object-cover" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'w-full h-full flex items-center justify-center bg-gradient-to-br from-red-400 to-orange-500 text-white font-bold\'>Image Loading</div>'">
+                        <img src="${photo.url}" alt="${photo.title}" class="w-full h-full object-cover loading-pulse" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'w-full h-full flex items-center justify-center bg-gradient-to-br from-red-400 to-orange-500 text-white font-bold\'>Image Loading</div>'">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
                             <div class="text-white">
                                 <h3 class="font-bold">${photo.title}</h3>
@@ -778,7 +887,7 @@
                         <button
                             onclick="changePhotoPage(${currentPhotoPage - 1})"
                             ${currentPhotoPage === 0 ? 'disabled' : ''}
-                            class="p-2 rounded-full bg-red-500 text-white ${currentPhotoPage === 0 ? 'bg-gray-300 cursor-not-allowed' : 'hover:bg-red-600'} transition-colors"
+                            class="p-2 rounded-full bg-red-500 text-white ${currentPhotoPage === 0 ? 'bg-gray-300 cursor-not-allowed' : 'hover:bg-red-600'} transition-colors hover-lift"
                         >
                             <i class="fas fa-chevron-left"></i>
                         </button>
@@ -788,7 +897,7 @@
                         <button
                             onclick="changePhotoPage(${currentPhotoPage + 1})"
                             ${currentPhotoPage === totalPages - 1 ? 'disabled' : ''}
-                            class="p-2 rounded-full bg-red-500 text-white ${currentPhotoPage === totalPages - 1 ? 'bg-gray-300 cursor-not-allowed' : 'hover:bg-red-600'} transition-colors"
+                            class="p-2 rounded-full bg-red-500 text-white ${currentPhotoPage === totalPages - 1 ? 'bg-gray-300 cursor-not-allowed' : 'hover:bg-red-600'} transition-colors hover-lift"
                         >
                             <i class="fas fa-chevron-right"></i>
                         </button>
@@ -824,7 +933,7 @@
             const galleryContainer = document.getElementById('video-gallery');
             if (galleryContainer) {
                 galleryContainer.innerHTML = displayVideos.map(video => `
-                    <div class="bg-gray-800 rounded-lg overflow-hidden shadow-xl transform hover:scale-105 transition-all">
+                    <div class="bg-gray-800 rounded-lg overflow-hidden shadow-xl transform hover:scale-105 transition-all hover-lift">
                         <div class="aspect-video">
                             <iframe
                                 src="https://www.youtube.com/embed/${video.id}"
@@ -850,7 +959,7 @@
                         <button
                             onclick="changeVideoPage(${currentVideoPage - 1})"
                             ${currentVideoPage === 0 ? 'disabled' : ''}
-                            class="p-2 rounded-full bg-red-500 text-white ${currentVideoPage === 0 ? 'bg-gray-600 cursor-not-allowed' : 'hover:bg-red-600'}"
+                            class="p-2 rounded-full bg-red-500 text-white ${currentVideoPage === 0 ? 'bg-gray-600 cursor-not-allowed' : 'hover:bg-red-600'} hover-lift"
                         >
                             <i class="fas fa-chevron-left"></i>
                         </button>
@@ -860,7 +969,7 @@
                         <button
                             onclick="changeVideoPage(${currentVideoPage + 1})"
                             ${currentVideoPage === totalPages - 1 ? 'disabled' : ''}
-                            class="p-2 rounded-full bg-red-500 text-white ${currentVideoPage === totalPages - 1 ? 'bg-gray-600 cursor-not-allowed' : 'hover:bg-red-600'}"
+                            class="p-2 rounded-full bg-red-500 text-white ${currentVideoPage === totalPages - 1 ? 'bg-gray-600 cursor-not-allowed' : 'hover:bg-red-600'} hover-lift"
                         >
                             <i class="fas fa-chevron-right"></i>
                         </button>
@@ -884,12 +993,12 @@
             const teamContainer = document.getElementById('team-members');
             if (teamContainer) {
                 teamContainer.innerHTML = teamMembers.map(member => `
-                    <div class="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow">
-                        <div class="h-64 team-image bg-gradient-to-br from-red-400 to-orange-500" style="background-image: url('${member.image}')"></div>
+                    <div class="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all hover-lift">
+                        <div class="h-64 team-image bg-gradient-to-br from-red-400 to-orange-500 loading-pulse" style="background-image: url('${member.image}')"></div>
                         <div class="p-6">
                             <h3 class="text-xl font-bold mb-2">${member.name}</h3>
                             <p class="text-red-500 font-semibold mb-3">${member.position}</p>
-                            <p class="text-gray-600 text-sm">${member.bio}</p>
+                            <p class="text-gray-600 text-sm text-justify">${member.bio}</p>
                         </div>
                     </div>
                 `).join('');
@@ -924,6 +1033,8 @@
         // Scroll handler
         window.addEventListener('scroll', function() {
             const nav = document.getElementById('main-nav');
+            const scrollTopBtn = document.getElementById('scroll-top');
+            
             if (window.scrollY > 50) {
                 nav.classList.add('bg-gray-900', 'shadow-lg');
                 nav.classList.remove('bg-gray-900/95');
@@ -931,6 +1042,23 @@
                 nav.classList.remove('bg-gray-900', 'shadow-lg');
                 nav.classList.add('bg-gray-900/95');
             }
+            
+            // Show/hide scroll to top button
+            if (window.scrollY > 300) {
+                scrollTopBtn.classList.remove('opacity-0', 'translate-y-10');
+                scrollTopBtn.classList.add('opacity-100', 'translate-y-0');
+            } else {
+                scrollTopBtn.classList.add('opacity-0', 'translate-y-10');
+                scrollTopBtn.classList.remove('opacity-100', 'translate-y-0');
+            }
+        });
+
+        // Scroll to top function
+        document.getElementById('scroll-top').addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         });
 
         // Initialize the page
@@ -940,6 +1068,14 @@
             if (homeNav) {
                 homeNav.classList.add('text-red-500', 'font-bold');
             }
+            
+            // Hide loading overlay after page loads
+            setTimeout(() => {
+                document.getElementById('loading-overlay').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('loading-overlay').style.display = 'none';
+                }, 500);
+            }, 1500);
             
             // Initialize homepage content
             initHomePage();
