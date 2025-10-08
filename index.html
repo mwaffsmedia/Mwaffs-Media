@@ -226,6 +226,37 @@
             border-color: #ef4444;
             box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
         }
+
+        /* NEW: Equipment icons animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .equipment-icon {
+            animation: float 6s ease-in-out infinite;
+            opacity: 0.7;
+        }
+        
+        .equipment-icon:nth-child(2) {
+            animation-delay: 1s;
+        }
+        
+        .equipment-icon:nth-child(3) {
+            animation-delay: 2s;
+        }
+        
+        .equipment-icon:nth-child(4) {
+            animation-delay: 3s;
+        }
+        
+        .equipment-icon:nth-child(5) {
+            animation-delay: 4s;
+        }
+        
+        .equipment-icon:nth-child(6) {
+            animation-delay: 5s;
+        }
     </style>
 </head>
 <body class="bg-white min-h-screen">
@@ -281,9 +312,19 @@
         </div>
     </div>
 
-    <!-- Hero Section -->
+    <!-- Hero Section with NEW gradient background and equipment icons -->
     <section id="home-section" class="section-visible">
-        <div class="relative h-screen flex items-center justify-center text-white text-center px-4 parallax" style="background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('images/hero-bg.jpg');">
+        <div class="relative h-screen flex items-center justify-center text-white text-center px-4 overflow-hidden" style="background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);">
+            <!-- Equipment icons in background -->
+            <div class="absolute inset-0 overflow-hidden">
+                <i class="fas fa-camera equipment-icon absolute text-white/20 text-6xl" style="top: 10%; left: 10%;"></i>
+                <i class="fas fa-video equipment-icon absolute text-white/20 text-5xl" style="top: 20%; right: 15%;"></i>
+                <i class="fas fa-film equipment-icon absolute text-white/20 text-7xl" style="bottom: 15%; left: 5%;"></i>
+                <i class="fas fa-microphone equipment-icon absolute text-white/20 text-4xl" style="bottom: 25%; right: 10%;"></i>
+                <i class="fas fa-headphones equipment-icon absolute text-white/20 text-6xl" style="top: 15%; left: 20%;"></i>
+                <i class="fas fa-lightbulb equipment-icon absolute text-white/20 text-5xl" style="bottom: 10%; right: 20%;"></i>
+            </div>
+            
             <div class="relative z-10 max-w-4xl mx-auto fade-in-up">
                 <h1 class="text-5xl md:text-7xl font-bold mb-6 text-balance">MWAFFS MEDIA</h1>
                 <p class="text-2xl md:text-3xl mb-4 text-red-400 text-balance">Capturing Malawi's Stories Through Creative Excellence</p>
@@ -291,6 +332,9 @@
                 <div class="flex gap-4 justify-center flex-wrap">
                     <button onclick="showPage('photography')" class="bg-red-500 hover:bg-red-600 text-white px-8 py-3 rounded-full flex items-center gap-2 transition-all transform hover:scale-105 hover-lift">
                         <i class="fas fa-camera"></i> View Photography
+                    </button>
+                    <button onclick="showPage('videography')" class="bg-red-500 hover:bg-red-600 text-white px-8 py-3 rounded-full flex items-center gap-2 transition-all transform hover:scale-105 hover-lift">
+                        <i class="fas fa-video"></i> View Videography
                     </button>
                     <button onclick="showPage('services')" class="bg-transparent border-2 border-white hover:bg-white hover:text-gray-900 text-white px-8 py-3 rounded-full flex items-center gap-2 transition-all transform hover:scale-105 hover-lift">
                         <i class="fas fa-concierge-bell"></i> Our Services
@@ -484,18 +528,23 @@
             </div>
         </div>
 
-        <!-- Newsletter Section -->
+        <!-- Newsletter Section with Web3Forms integration -->
         <div class="py-20 bg-gray-900 text-white">
             <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center fade-in-up">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4 text-balance">Stay Updated</h2>
                 <p class="text-xl text-gray-400 mb-8 text-balance">Subscribe to our newsletter for the latest updates, tips, and exclusive offers</p>
                 
-                <div class="max-w-md mx-auto newsletter-form">
-                    <input type="email" placeholder="Enter your email" class="w-full px-6 py-4 rounded-full text-gray-900 focus:outline-none focus:ring-2 focus:ring-red-500">
-                    <button class="absolute right-2 top-2 bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-full transition-colors">
+                <form class="max-w-md mx-auto newsletter-form" id="newsletter-form">
+                    <input type="email" name="email" placeholder="Enter your email" class="w-full px-6 py-4 rounded-full text-gray-900 focus:outline-none focus:ring-2 focus:ring-red-500" required>
+                    <input type="hidden" name="access_key" value="bda6a9f0-aa53-45f8-9226-81b6fc97250f">
+                    <input type="hidden" name="subject" value="Newsletter Subscription from MWAFFS MEDIA Website">
+                    <input type="hidden" name="to" value="mwaffsmedia@gmail.com">
+                    <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+                    <button type="submit" class="absolute right-2 top-2 bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-full transition-colors">
                         Subscribe
                     </button>
-                </div>
+                </form>
+                <p id="newsletter-result" class="mt-4 text-sm"></p>
             </div>
         </div>
 
@@ -824,7 +873,7 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
+    <!-- Contact Section with Web3Forms integration -->
     <section id="contact-section" class="section-hidden py-20 bg-gray-900 text-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
@@ -863,17 +912,11 @@
                     <div>
                         <h4 class="font-bold mb-4">Follow Us</h4>
                         <div class="flex gap-4">
-                            <a href="#" class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors transform hover:scale-110 hover-lift" title="Facebook">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-                            <a href="#" class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors transform hover:scale-110 hover-lift" title="YouTube">
+                            <a href="https://www.youtube.com/@MWAFFSMEDIA" target="_blank" class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors transform hover:scale-110 hover-lift" title="YouTube">
                                 <i class="fab fa-youtube"></i>
                             </a>
-                            <a href="#" class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors transform hover:scale-110 hover-lift" title="Instagram">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                            <a href="#" class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors transform hover:scale-110 hover-lift" title="Twitter">
-                                <i class="fab fa-twitter"></i>
+                            <a href="https://web.facebook.com/profile.php?id=61564288181126" target="_blank" class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center hover:bg-red-600 transition-colors transform hover:scale-110 hover-lift" title="Facebook">
+                                <i class="fab fa-facebook-f"></i>
                             </a>
                         </div>
                     </div>
@@ -881,20 +924,20 @@
 
                 <div class="bg-gray-800 p-8 rounded-lg hover-lift booking-form">
                     <h3 class="text-2xl font-bold mb-6">Send us a Message</h3>
-                    <div class="space-y-4">
+                    <form id="contact-form" class="space-y-4">
                         <div>
                             <label class="block mb-2 font-semibold">Full Name</label>
-                            <input type="text" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 focus:border-red-500 focus:outline-none text-white" placeholder="John Doe">
+                            <input type="text" name="name" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 focus:border-red-500 focus:outline-none text-white" placeholder="John Doe" required>
                         </div>
 
                         <div>
                             <label class="block mb-2 font-semibold">Email</label>
-                            <input type="email" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 focus:border-red-500 focus:outline-none text-white" placeholder="john@example.com">
+                            <input type="email" name="email" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 focus:border-red-500 focus:outline-none text-white" placeholder="john@example.com" required>
                         </div>
 
                         <div>
                             <label class="block mb-2 font-semibold">Service Needed</label>
-                            <select class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 focus:border-red-500 focus:outline-none text-white">
+                            <select name="service" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 focus:border-red-500 focus:outline-none text-white">
                                 <option>Photography</option>
                                 <option>Videography</option>
                                 <option>Graphic Design</option>
@@ -904,13 +947,19 @@
 
                         <div>
                             <label class="block mb-2 font-semibold">Message</label>
-                            <textarea rows="4" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 focus:border-red-500 focus:outline-none text-white" placeholder="Tell us about your project..."></textarea>
+                            <textarea rows="4" name="message" class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 focus:border-red-500 focus:outline-none text-white" placeholder="Tell us about your project..." required></textarea>
                         </div>
 
-                        <button class="w-full bg-red-500 hover:bg-red-600 text-white px-8 py-3 rounded-full font-bold transition-colors hover-lift">
+                        <!-- Web3Forms hidden fields -->
+                        <input type="hidden" name="access_key" value="bda6a9f0-aa53-45f8-9226-81b6fc97250f">
+                        <input type="hidden" name="subject" value="New Contact Form Submission from MWAFFS MEDIA Website">
+                        <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+
+                        <button type="submit" class="w-full bg-red-500 hover:bg-red-600 text-white px-8 py-3 rounded-full font-bold transition-colors hover-lift">
                             Send Message
                         </button>
-                    </div>
+                    </form>
+                    <p id="contact-result" class="mt-4 text-sm"></p>
                 </div>
             </div>
         </div>
@@ -1358,9 +1407,9 @@
         }
 
         function initPhotographyPage() {
-            // Populate categories
+            // Populate categories - REORDERED: Events now first
             const categoriesContainer = document.getElementById('photo-categories');
-            const categories = ['all', 'Day Pictures', 'Night Pictures', 'Couple', 'Events'];
+            const categories = ['all', 'Events', 'Day Pictures', 'Night Pictures', 'Couple'];
             
             if (categoriesContainer) {
                 categoriesContainer.innerHTML = categories.map(cat => `
@@ -1385,7 +1434,7 @@
         }
 
         function updatePhotoCategories() {
-            const categories = ['all', 'Day Pictures', 'Night Pictures', 'Couple', 'Events'];
+            const categories = ['all', 'Events', 'Day Pictures', 'Night Pictures', 'Couple'];
             const buttons = document.querySelectorAll('#photo-categories button');
             
             buttons.forEach((btn, index) => {
@@ -1649,6 +1698,53 @@
             currentModalArray = [];
         }
 
+        // Web3Forms Integration
+        function handleFormSubmit(formId, resultId, successMessage) {
+            const form = document.getElementById(formId);
+            const result = document.getElementById(resultId);
+            
+            form.addEventListener("submit", function (e) {
+                e.preventDefault();
+                const formData = new FormData(form);
+                
+                // Add the recipient email to the form data
+                formData.append("to", "mwaffsmedia@gmail.com");
+                
+                const object = Object.fromEntries(formData);
+                const json = JSON.stringify(object);
+                
+                result.innerHTML = "Please wait...";
+                
+                fetch("https://api.web3forms.com/submit", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Accept: "application/json"
+                    },
+                    body: json
+                })
+                .then(async (response) => {
+                    let json = await response.json();
+                    if (response.status == 200) {
+                        result.innerHTML = successMessage;
+                        form.reset();
+                    } else {
+                        console.log(response);
+                        result.innerHTML = json.message;
+                    }
+                })
+                .catch((error) => {
+                    console.log(error);
+                    result.innerHTML = "Something went wrong! Please try again later.";
+                })
+                .then(function () {
+                    setTimeout(() => {
+                        result.innerHTML = "";
+                    }, 5000);
+                });
+            });
+        }
+
         // Scroll handler
         window.addEventListener('scroll', function() {
             const nav = document.getElementById('main-nav');
@@ -1701,6 +1797,10 @@
             
             // Auto-advance testimonials
             setInterval(nextTestimonial, 5000);
+            
+            // Initialize Web3Forms
+            handleFormSubmit("contact-form", "contact-result", "Thank you for your message! We'll get back to you soon.");
+            handleFormSubmit("newsletter-form", "newsletter-result", "Thank you for subscribing to our newsletter!");
         });
     </script>
 </body>
