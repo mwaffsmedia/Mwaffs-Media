@@ -467,17 +467,19 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-16 fade-in-up">
                     <h2 class="text-4xl md:text-5xl font-bold mb-4 text-balance">Latest From Our Blog</h2>
-                    <p class="text-xl text-gray-600 text-balance">Insights, tips, and stories from the creative world</p>
+                    <p class="text-xl text-gray-600 text-balance">Full access and functionality coming soon</p>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="blog-preview">
-                    <!-- Blog posts will be populated by JavaScript -->
-                </div>
-
-                <div class="text-center mt-12 fade-in-up">
-                    <button onclick="showPage('blog')" class="bg-red-500 hover:bg-red-600 text-white px-8 py-3 rounded-full font-bold transition-colors hover-lift">
-                        View All Blog Posts
-                    </button>
+                <div class="grid grid-cols-1 md:grid-cols-1 gap-8" id="blog-preview">
+                    <div class="blog-card bg-white rounded-lg overflow-hidden shadow-lg">
+                        <div class="h-48 bg-gradient-to-br from-red-400 to-orange-500 overflow-hidden flex items-center justify-center">
+                            <div class="text-center text-white p-6">
+                                <i class="fas fa-wrench text-5xl mb-4"></i>
+                                <h3 class="text-2xl font-bold">Full Access and Functionality Coming Soon</h3>
+                                <p class="mt-2">We're working on bringing you an amazing blog experience. Stay tuned!</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -791,11 +793,19 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="text-4xl md:text-5xl font-bold mb-4 text-balance">MWAFFS MEDIA Blog</h2>
-                <p class="text-xl text-gray-600 text-balance">Insights, tips, and stories from the creative world</p>
+                <p class="text-xl text-gray-600 text-balance">Full access and functionality coming soon</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="blog-posts">
-                <!-- Blog posts will be populated by JavaScript -->
+            <div class="grid grid-cols-1 md:grid-cols-1 gap-8" id="blog-posts">
+                <div class="blog-card bg-white rounded-lg overflow-hidden shadow-lg max-w-2xl mx-auto">
+                    <div class="h-64 bg-gradient-to-br from-red-400 to-orange-500 overflow-hidden flex items-center justify-center">
+                        <div class="text-center text-white p-6">
+                            <i class="fas fa-wrench text-6xl mb-4"></i>
+                            <h3 class="text-3xl font-bold mb-4">Full Access and Functionality Coming Soon</h3>
+                            <p class="text-xl">We're working on bringing you an amazing blog experience. Stay tuned for updates!</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -1000,7 +1010,7 @@
         let currentModalIndex = 0;
         let currentModalArray = [];
 
-        // Data - FIXED: Corrected image paths and file extensions
+        // Data - FIXED: Corrected image paths from "ivents" to "invents"
         const youtubeVideos = [
             { id: 'nZ5DNJTSoFs', title: 'Business Tips - Podcast Ep1', category: 'Mwaffs Media - Podcast' },
             { id: '9V1HfbEH1I4', title: 'Business Tips - Podcast Ep2', category: 'Mwaffs Media - Podcast' },
@@ -1013,109 +1023,61 @@
             { id: 'Kg3zVcGCq8I', title: 'Special Ep with Bunda BSC', category: 'Mwaffs Media - Podcast' },
         ];
 
-        // Generate photo data - FIXED: Corrected image paths and file extensions
+        // Generate photo data - FIXED: Corrected image paths from "ivents" to "invents"
         const photos = [
-            { id: 48, url: 'images/d1.jpg', title: 'Day Light Pictures', category: 'Day Pictures', aspect: 'portrait' },
-            { id: 47, url: 'images/d2.jpg', title: 'Day Light Pictures', category: 'Day Pictures', aspect: 'portrait' },
-            { id: 46, url: 'images/photography/dps.jpg', title: 'Day Light Pictures', category: 'Day Pictures', aspect: 'portrait' },
-            { id: 45, url: 'images/np1.jpg', title: 'Night Pictures', category: 'Night Pictures', aspect: 'square' },
-            { id: 44, url: 'images/np3.jpg', title: 'Night Pictures', category: 'Night Pictures', aspect: 'square' },
-            { id: 43, url: 'images/photography/npc.jpg', title: 'Night Pictures', category: 'Couple', aspect: 'square' },
-            { id: 42, url: 'images/photography/npc1.jpg', title: 'Night Pictures', category: 'Couple', aspect: 'square' },
-            { id: 41, url: 'images/photography/npc2.jpg', title: 'Night Pictures', category: 'Couple', aspect: 'square' },
-            { id: 40, url: 'images/photography/npc3.jpg', title: 'Night Pictures', category: 'Couple', aspect: 'square' },
-            { id: 39, url: 'images/photography/np2.jpg', title: 'Night Pictures', category: 'Night Pictures', aspect: 'portrait' },
-            { id: 38, url: 'images/photography/nps.jpg', title: 'Night Pictures', category: 'Night Pictures', aspect: 'portrait' },
-            { id: 37, url: 'images/photography/nps1.jpg', title: 'Night Pictures', category: 'Night Pictures', aspect: 'portrait' },
-            { id: 36, url: 'images/photography/nps2.jpg', title: 'Night Pictures', category: 'Night Pictures', aspect: 'portrait' },
-            { id: 35, url: 'images/photography/nps3.jpg', title: 'Night Pictures', category: 'Night Pictures', aspect: 'portrait' },
-            { id: 34, url: 'images/photography/nps4.jpg', title: 'Night Pictures', category: 'Night Pictures', aspect: 'portrait' },
-            { id: 33, url: 'images/photography/nps5.jpg', title: 'Night Pictures', category: 'Night Pictures', aspect: 'portrait' },
-            { id: 32, url: 'images/photography/npc4.jpg', title: 'Night Pictures', category: 'Couple', aspect: 'portrait' },
-            { id: 31, url: 'images/photography/cd.jpg', title: 'Big Events', category: 'Events', aspect: 'landscape' },
-            { id: 30, url: 'images/photography/cd1.jpg', title: 'Big Events', category: 'Events', aspect: 'landscape' },
-            { id: 29, url: 'images/photography/cd3.jpg', title: 'Big Events', category: 'Events', aspect: 'landscape' },
-            { id: 28, url: 'images/photography/npg1.jpg', title: 'Big Events', category: 'Events', aspect: 'landscape' },
-            { id: 27, url: 'images/photography/npg2.jpg', title: 'Night Pictures', category: 'Events', aspect: 'landscape' },
-            { id: 26, url: 'images/photography/npg.jpg', title: 'Night Pictures', category: 'Events', aspect: 'landscape' },
-            { id: 25, url: 'images/np2.jpg', title: 'Night Pictures', category: 'Night Pictures', aspect: 'portrait' },
-            { id: 24, url: 'images/invents/tep.jpg', title: 'Big Events', category: 'Events', aspect: 'portrait' },
-            { id: 23, url: 'images/invents/tep1.jpg', title: 'Big Events', category: 'Events', aspect: 'portrait' },
-            { id: 22, url: 'images/invents/tep2.jpg', title: 'Big Events', category: 'Events', aspect: 'portrait' },
-            { id: 21, url: 'images/invents/tep3.jpg', title: 'Big Events', category: 'Events', aspect: 'portrait' },
-            { id: 20, url: 'images/invents/tep4.jpg', title: 'Big Events', category: 'Events', aspect: 'portrait' },
-            { id: 19, url: 'images/invents/tep5.jpg', title: 'Big Events', category: 'Events', aspect: 'portrait' },
-            { id: 18, url: 'images/invents/tep6.jpg', title: 'Big Events', category: 'Events', aspect: 'portrait' },
-            { id: 17, url: 'images/invents/tep7.jpg', title: 'Big Events', category: 'Events', aspect: 'portrait' },
-            { id: 16, url: 'images/invents/tep8.jpg', title: 'Big Events', category: 'Events', aspect: 'portrait' },
-            { id: 15, url: 'images/invents/tep9.jpg', title: 'Big Events', category: 'Events', aspect: 'portrait' },
-            { id: 14, url: 'images/invents/tep10.jpg', title: 'Big Events', category: 'Events', aspect: 'portrait' },
-            { id: 13, url: 'images/invents/tep11.jpg', title: 'Big Events', category: 'Events', aspect: 'portrait' },
-            { id: 12, url: 'images/invents/tep12.jpg', title: 'Big Events', category: 'Events', aspect: 'portrait' },
-            { id: 11, url: 'images/invents/tep13.jpg', title: 'Big Events', category: 'Events', aspect: 'portrait' },
-            { id: 10, url: 'images/invents/te.jpg', title: 'Big Events', category: 'Events', aspect: 'landscape' },
-            { id: 9, url: 'images/invents/te1.jpg', title: 'Big Events', category: 'Events', aspect: 'landscape' },
-            { id: 8, url: 'images/invents/te7.jpg', title: 'Big Events', category: 'Events', aspect: 'landscape' },
-            { id: 7, url: 'images/invents/te3.jpg', title: 'Big Events', category: 'Events', aspect: 'landscape' },
-            { id: 6, url: 'images/invents/te4.jpg', title: 'Big Events', category: 'Events', aspect: 'landscape' },
-            { id: 5, url: 'images/invents/te5.jpg', title: 'Big Events', category: 'Events', aspect: 'landscape' },
-            { id: 4, url: 'images/invents/te6.jpg', title: 'Big Events', category: 'Events', aspect: 'landscape' },
-            { id: 3, url: 'images/invents/te8.jpg', title: 'Big Events', category: 'Events', aspect: 'landscape' },
-            { id: 2, url: 'images/invents/te9.jpg', title: 'Big Events', category: 'Events', aspect: 'landscape' },
-            { id: 1, url: 'images/invents/te10.jpg', title: 'Big Events', category: 'Events', aspect: 'landscape' }
+            { id: 1, url: 'images/d1.jpg', title: 'Day Light Pictures', category: 'Day Pictures', aspect: 'portrait' },
+            { id: 2, url: 'images/d2.jpg', title: 'Day Light Pictures', category: 'Day Pictures', aspect: 'portrait' },
+            { id: 3, url: 'images/photography/dps.jpg', title: 'Day Light Pictures', category: 'Day Pictures', aspect: 'portrait' },
+            { id: 4, url: 'images/np1.jpg', title: 'Night Pictures', category: 'Night Pictures', aspect: 'square' },
+            { id: 5, url: 'images/np3.jpg', title: 'Night Pictures', category: 'Night Pictures', aspect: 'square' },
+            { id: 6, url: 'images/photography/npc.jpg', title: 'Night Pictures', category: 'Couple', aspect: 'square' },
+            { id: 7, url: 'images/photography/npc1.jpg', title: 'Night Pictures', category: 'Couple', aspect: 'square' },
+            { id: 8, url: 'images/photography/npc2.jpg', title: 'Night Pictures', category: 'Couple', aspect: 'square' },
+            { id: 9, url: 'images/photography/npc3.jpg', title: 'Night Pictures', category: 'Couple', aspect: 'square' },
+            { id: 10, url: 'images/photography/np2.jpg', title: 'Night Pictures', category: 'Night Pictures', aspect: 'portrait' },
+            { id: 11, url: 'images/photography/nps.jpg', title: 'Night Pictures', category: 'Night Pictures', aspect: 'portrait' },
+            { id: 12, url: 'images/photography/nps1.jpg', title: 'Night Pictures', category: 'Night Pictures', aspect: 'portrait' },
+            { id: 13, url: 'images/photography/nps2.jpg', title: 'Night Pictures', category: 'Night Pictures', aspect: 'portrait' },
+            { id: 14, url: 'images/photography/nps3.jpg', title: 'Night Pictures', category: 'Night Pictures', aspect: 'portrait' },
+            { id: 15, url: 'images/photography/nps4.jpg', title: 'Night Pictures', category: 'Night Pictures', aspect: 'portrait' },
+            { id: 16, url: 'images/photography/nps5.jpg', title: 'Night Pictures', category: 'Night Pictures', aspect: 'portrait' },
+            { id: 17, url: 'images/photography/npc4.jpg', title: 'Night Pictures', category: 'Couple', aspect: 'portrait' },
+            { id: 18, url: 'images/photography/cd.jpg', title: 'Big Events', category: 'Events', aspect: 'landscape' },
+            { id: 19, url: 'images/photography/cd1.jpg', title: 'Big Events', category: 'Events', aspect: 'landscape' },
+            { id: 20, url: 'images/photography/cd3.jpg', title: 'Big Events', category: 'Events', aspect: 'landscape' },
+            { id: 21, url: 'images/photography/npg1.jpg', title: 'Big Events', category: 'Events', aspect: 'landscape' },
+            { id: 22, url: 'images/photography/npg2.jpg', title: 'Night Pictures', category: 'Events', aspect: 'landscape' },
+            { id: 23, url: 'images/photography/npg.jpg', title: 'Night Pictures', category: 'Events', aspect: 'landscape' },
+            { id: 24, url: 'images/np2.jpg', title: 'Night Pictures', category: 'Night Pictures', aspect: 'portrait' },
+            { id: 25, url: 'images/invents/tep.jpg', title: 'Big Events', category: 'Events', aspect: 'portrait' },
+            { id: 26, url: 'images/invents/tep1.jpg', title: 'Big Events', category: 'Events', aspect: 'portrait' },
+            { id: 27, url: 'images/invents/tep2.jpg', title: 'Big Events', category: 'Events', aspect: 'portrait' },
+            { id: 28, url: 'images/invents/tep3.jpg', title: 'Big Events', category: 'Events', aspect: 'portrait' },
+            { id: 29, url: 'images/invents/tep4.jpg', title: 'Big Events', category: 'Events', aspect: 'portrait' },
+            { id: 30, url: 'images/invents/tep5.jpg', title: 'Big Events', category: 'Events', aspect: 'portrait' },
+            { id: 31, url: 'images/invents/tep6.jpg', title: 'Big Events', category: 'Events', aspect: 'portrait' },
+            { id: 32, url: 'images/invents/tep7.jpg', title: 'Big Events', category: 'Events', aspect: 'portrait' },
+            { id: 33, url: 'images/invents/tep8.jpg', title: 'Big Events', category: 'Events', aspect: 'portrait' },
+            { id: 34, url: 'images/invents/tep9.jpg', title: 'Big Events', category: 'Events', aspect: 'portrait' },
+            { id: 35, url: 'images/invents/tep10.jpg', title: 'Big Events', category: 'Events', aspect: 'portrait' },
+            { id: 36, url: 'images/invents/tep11.jpg', title: 'Big Events', category: 'Events', aspect: 'portrait' },
+            { id: 37, url: 'images/invents/tep12.jpg', title: 'Big Events', category: 'Events', aspect: 'portrait' },
+            { id: 38, url: 'images/invents/tep13.jpg', title: 'Big Events', category: 'Events', aspect: 'portrait' },
+            { id: 39, url: 'images/np2.jpg', title: 'Night Pictures', category: 'Night Pictures', aspect: 'portrait' },
+            { id: 40, url: 'images/invents/te.jpg', title: 'Big Events', category: 'Events', aspect: 'landscape' },
+            { id: 41, url: 'images/invents/te1.jpg', title: 'Big Events', category: 'Events', aspect: 'landscape' },
+            { id: 43, url: 'images/invents/te7.jpg', title: 'Big Events', category: 'Events', aspect: 'landscape' },
+            { id: 44, url: 'images/invents/te3.jpg', title: 'Big Events', category: 'Events', aspect: 'landscape' },
+            { id: 45, url: 'images/invents/te4.jpg', title: 'Big Events', category: 'Events', aspect: 'landscape' },
+            { id: 46, url: 'images/invents/te5.jpg', title: 'Big Events', category: 'Events', aspect: 'landscape' },
+            { id: 47, url: 'images/invents/te6.jpg', title: 'Big Events', category: 'Events', aspect: 'landscape' },
+            { id: 48, url: 'images/invents/te8.jpg', title: 'Big Events', category: 'Events', aspect: 'landscape' },
+            { id: 49, url: 'images/invents/te9.jpg', title: 'Big Events', category: 'Events', aspect: 'landscape' },
+            { id: 50, url: 'images/invents/te10.jpg', title: 'Big Events', category: 'Events', aspect: 'landscape' }
         ];
 
-        // Blog posts data
-        const blogPosts = [
-            { 
-                id: 1, 
-                title: 'The Art of Storytelling Through Photography', 
-                excerpt: 'Learn how to capture compelling narratives in your photographs that resonate with viewers and tell powerful stories.',
-                image: 'images/blog/storytelling.jpg',
-                date: 'March 15, 2025',
-                category: 'Photography Tips'
-            },
-            { 
-                id: 2, 
-                title: '5 Essential Video Production Tips for Beginners', 
-                excerpt: 'Discover the fundamental techniques that will elevate your video production quality and engage your audience effectively.',
-                image: 'images/blog/video-tips.jpg',
-                date: 'March 10, 2025',
-                category: 'Videography'
-            },
-            { 
-                id: 3, 
-                title: 'How to Choose the Right Media Company for Your Event', 
-                excerpt: 'A comprehensive guide to selecting the perfect media partner to capture your special moments with professionalism and creativity.',
-                image: 'images/blog/choose-media.jpg',
-                date: 'March 5, 2025',
-                category: 'Advice'
-            },
-            { 
-                id: 4, 
-                title: 'The Power of Visual Branding in the Digital Age', 
-                excerpt: 'Explore how strong visual branding can transform your business presence and connect with your target audience more effectively.',
-                image: 'images/blog/visual-branding.jpg',
-                date: 'February 28, 2025',
-                category: 'Graphic Design'
-            },
-            { 
-                id: 5, 
-                title: 'Behind the Scenes: Capturing Malawi\'s Cultural Events', 
-                excerpt: 'A look at how we document and preserve the rich cultural heritage of Malawi through our lens and creative vision.',
-                image: 'images/blog/cultural-events.jpg',
-                date: 'February 20, 2025',
-                category: 'Behind the Scenes'
-            },
-            { 
-                id: 6, 
-                title: 'Podcasting 101: Equipment and Setup for Quality Audio', 
-                excerpt: 'Everything you need to know about starting your own podcast with professional-quality audio on any budget.',
-                image: 'images/blog/podcasting.jpg',
-                date: 'February 15, 2025',
-                category: 'Podcasting'
-            }
-        ];
+        // Blog posts data - REMOVED: No longer needed
+        const blogPosts = [];
 
         const photosPerPage = 12;
         const videosPerPage = 6;
@@ -1256,28 +1218,18 @@
             // Render blog preview
             const blogPreviewContainer = document.getElementById('blog-preview');
             if (blogPreviewContainer) {
-                const previewPosts = blogPosts.slice(0, 3); // Get first 3 posts
-                
-                blogPreviewContainer.innerHTML = previewPosts.map(post => `
+                // Show a single "coming soon" card instead of blog posts
+                blogPreviewContainer.innerHTML = `
                     <div class="blog-card bg-white rounded-lg overflow-hidden shadow-lg">
-                        <div class="h-48 bg-gradient-to-br from-red-400 to-orange-500 overflow-hidden">
-                            <div class="w-full h-full flex items-center justify-center text-white font-bold">
-                                ${post.title}
-                            </div>
-                        </div>
-                        <div class="p-6">
-                            <span class="text-red-500 text-sm font-semibold">${post.category}</span>
-                            <h3 class="text-xl font-bold my-2">${post.title}</h3>
-                            <p class="text-gray-600 mb-4 text-justify">${post.excerpt}</p>
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-500 text-sm">${post.date}</span>
-                                <button onclick="showPage('blog')" class="text-red-500 hover:text-red-600 font-semibold text-sm">
-                                    Read More <i class="fas fa-arrow-right ml-1"></i>
-                                </button>
+                        <div class="h-48 bg-gradient-to-br from-red-400 to-orange-500 overflow-hidden flex items-center justify-center">
+                            <div class="text-center text-white p-6">
+                                <i class="fas fa-wrench text-5xl mb-4"></i>
+                                <h3 class="text-2xl font-bold">Full Access and Functionality Coming Soon</h3>
+                                <p class="mt-2">We're working on bringing you an amazing blog experience. Stay tuned!</p>
                             </div>
                         </div>
                     </div>
-                `).join('');
+                `;
             }
             
             // Animate statistics if not already animated
@@ -1602,26 +1554,18 @@
         function initBlogPage() {
             const blogContainer = document.getElementById('blog-posts');
             if (blogContainer) {
-                blogContainer.innerHTML = blogPosts.map(post => `
-                    <div class="blog-card bg-white rounded-lg overflow-hidden shadow-lg">
-                        <div class="h-48 bg-gradient-to-br from-red-400 to-orange-500 overflow-hidden">
-                            <div class="w-full h-full flex items-center justify-center text-white font-bold text-center p-4">
-                                ${post.title}
-                            </div>
-                        </div>
-                        <div class="p-6">
-                            <span class="text-red-500 text-sm font-semibold">${post.category}</span>
-                            <h3 class="text-xl font-bold my-2">${post.title}</h3>
-                            <p class="text-gray-600 mb-4 text-justify">${post.excerpt}</p>
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-500 text-sm">${post.date}</span>
-                                <button class="text-red-500 hover:text-red-600 font-semibold text-sm">
-                                    Read More <i class="fas fa-arrow-right ml-1"></i>
-                                </button>
+                // Show a single "coming soon" card instead of blog posts
+                blogContainer.innerHTML = `
+                    <div class="blog-card bg-white rounded-lg overflow-hidden shadow-lg max-w-2xl mx-auto">
+                        <div class="h-64 bg-gradient-to-br from-red-400 to-orange-500 overflow-hidden flex items-center justify-center">
+                            <div class="text-center text-white p-6">
+                                <i class="fas fa-wrench text-6xl mb-4"></i>
+                                <h3 class="text-3xl font-bold mb-4">Full Access and Functionality Coming Soon</h3>
+                                <p class="text-xl">We're working on bringing you an amazing blog experience. Stay tuned for updates!</p>
                             </div>
                         </div>
                     </div>
-                `).join('');
+                `;
             }
         }
 
